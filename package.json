@@ -7,6 +7,7 @@
     "email": "cleviojr20@gmail.com"
   },
   "dependencies": {
+    "apollo-boost": "^0.4.4",
     "apollo-client": "^2.6.4",
     "electron-is-dev": "^1.1.0",
     "graphql": "^14.5.8",
@@ -53,7 +54,6 @@
     "@rescripts/cli": "^0.0.13",
     "@rescripts/rescript-env": "^0.0.11",
     "babel-eslint": "10.0.3",
-    "apollo-boost": "^0.4.4",
     "babel-literal-to-ast": "2.1.0",
     "babel-loader": "8.0.6",
     "electron": "^7.0.0",
