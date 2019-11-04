@@ -21,7 +21,8 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Yuiko />
-  </ApolloProvider>, document.getElementById('root'),
+  </ApolloProvider>,
+  document.getElementById('root'),
 );
 
 serviceWorker.register();
