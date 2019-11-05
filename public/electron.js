@@ -11,9 +11,13 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
+    autoHideMenuBar: true,
   });
 
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${join(__dirname, '../build/index.html')}`);
+  mainWindow.loadURL(
+    isDev ? 'http://localhost:3000' : `file://${join(__dirname, '../build/index.html')}`,
+  );
+
   if (isDev) {
     // Open the DevTools.
     // eslint-disable-next-line no-console
@@ -21,6 +25,7 @@ function createWindow() {
     // BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
     // mainWindow.webContents.openDevTools();
   }
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -38,4 +43,8 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+app.on('browser-window-created', (event, window) => {
+  window.setAutoHideMenuBar(true);
 });
