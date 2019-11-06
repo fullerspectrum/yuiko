@@ -1,30 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import os from 'os';
 import { gql } from 'apollo-boost';
-import { useQuery } from 'react-apollo';
-import { getViewer } from '../queries';
+import { useQuery, useLazyQuery } from 'react-apollo';
+import { getViewer, getAnimeList } from '../lib/anilist';
 
 import './Yuiko.css';
 
 export default function Yuiko() {
-  const [displayName, setDisplayName] = useState(false);
-  const { loading, data } = useQuery(gql(getViewer));
+  const { loading: isLoadingSession, data: sessionData, error: sessionError } = useQuery(
+    gql(getViewer),
+    {
+      notifyOnNetworkStatusChange: true,
+    },
+  );
+
+  const skip = sessionData === undefined;
+
+  const [getList, { loading, error, data }] = useLazyQuery(gql(getAnimeList), {
+    notifyOnNetworkStatusChange: true,
+    variables: {
+      id: skip ? null : sessionData.Viewer.id,
+    },
+    skip,
+  });
 
   useEffect(() => {
-    if (loading) document.title = 'Loading Yuiko...';
-    else if (data) document.title = `Yuiko at ${os.platform()}. Welcome, ${data.Viewer.name}!`;
-  });
+    if (isLoadingSession) document.title = 'Loading Yuiko...';
+    else if (sessionData) {
+      document.title = `Yuiko at ${os.platform()}. Welcome, ${sessionData.Viewer.name}!`;
+    }
+  }, [isLoadingSession, sessionData]);
 
   return (
     <div className="Yuiko">
       <header className="Yuiko-header">
-        <p>
-          Show me some
-          <span> </span>
-          <button variant="outline-dark" type="submit" onClick={() => setDisplayName(!displayName)}>
-            Anime
-          </button>
-        </p>
+        <button
+          variant="outline-dark"
+          type="submit"
+          onClick={() => {
+            getList();
+          }}
+        >
+          Please show
+        </button>
+        <p> me the first anime on my list.</p>
+
         <a
           className="Yuiko-link"
           href="http://yuiko.c-or.me"
@@ -33,11 +53,15 @@ export default function Yuiko() {
         >
           visit our website.
         </a>
-        {displayName && <p>{`${data ? data.Viewer.id : null}`}</p>}
+        {data && (
+          <p>
+            {`${data.MediaListCollection.lists[0].entries[0].media.title.romaji || 'Loading...'}`}
+          </p>
+        )}
       </header>
       <footer className="Yuiko-footer">
         <section>
-          <p>{loading ? 'Fetching data from anilist...' : 'Learning HTML.'}</p>
+          <p>{isLoadingSession ? 'Fetching data from anilist...' : 'Not fetching anything.'}</p>
         </section>
       </footer>
     </div>
