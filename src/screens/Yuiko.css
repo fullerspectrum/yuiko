@@ -7,7 +7,7 @@
 }
 
 .Yuiko-header {
-  background-color: #282c34;
+  background-color: #121212;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,11 +22,11 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #282c34;
+  background-color: #121212;
   color: white;
   text-align: center;
 }
 
 .Yuiko-link {
-  color: #09d3ac;
+  color: #fd79a8;
 }
