@@ -3,9 +3,15 @@ import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import './index.css';
-import Yuiko from './screens/Yuiko';
+import { readFileSync } from 'fs';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { remote } from 'electron';
+import Yuiko from './Yuiko';
 import * as serviceWorker from './serviceWorker';
-import { token } from './credentials.json';
+
+const { token } = JSON.parse(
+  readFileSync(`${remote.app.getPath('appData')}/yuiko/credentials.json`),
+);
 
 const client = new ApolloClient({
   uri: 'https://graphql.anilist.co',
