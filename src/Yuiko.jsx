@@ -45,7 +45,7 @@ export default function Yuiko() {
   return (
     <HashRouter>
       <h1>{viewer ? viewer.name : ''}</h1>
-      <Link to="/Watching">Go to a Anime List</Link>
+      <Link to="/Watching">Go to an Anime List</Link>
       <p />
       <Link to="/">Go home</Link>
       <Switch>
