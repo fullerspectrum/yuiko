@@ -1,1 +1,1 @@
-Use yarn electron-pack to build. Create a file named credentials.json with an anilist token field on it inside your yuiko folder in your system's AppData folder (e.g ~/.config/yuiko/credentials.json).
+Use yarn electron-pack to build. Create a file named credentials.json with an anilist "token" field on it inside your yuiko folder in your system's AppData folder (e.g ~/.config/yuiko/credentials.json).
