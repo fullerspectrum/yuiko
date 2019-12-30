@@ -4,7 +4,7 @@ import { useQuery } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import os from 'os';
 import { getViewer, getAnimeList } from './lib/anilist';
-import './index.css';
+import './Yuiko.css';
 import AnimeList from './screens/AnimeList/AnimeList';
 import NowPlaying from './screens/NowPlaying/NowPlaying';
 
@@ -44,17 +44,12 @@ export default function Yuiko() {
 
   return (
     <HashRouter>
-      <div className="main">
+      <div>
         <h1>{viewer ? viewer.name : 'I am not connected to anilist.'}</h1>
-        {lists &&
-          lists.map((item, index) => (
-            <Link key={index} to={() => `/lists/${item.name.toLowerCase()}`}>
-              {item.name}
-            </Link>
-          ))}
-        ;
         <p />
-        <Link to="/">Go home</Link>
+        <Link to="/">Go home </Link>
+        {/* reminder to put a default list in a settings files later. */}
+        <Link to="/lists/watching">Go to your main list</Link>
       </div>
       <Switch>
         <Route path="/" exact component={NowPlaying} />
