@@ -46,13 +46,22 @@ export default function Yuiko() {
     <HashRouter>
       <div className="main">
         <h1>{viewer ? viewer.name : 'I am not connected to anilist.'}</h1>
-        <Link to="/Completed">Go to an Anime List</Link>
+        {lists &&
+          lists.map((item, index) => (
+            <Link key={index} to={() => `/lists/${item.name.toLowerCase()}`}>
+              {item.name}
+            </Link>
+          ))}
+        ;
         <p />
         <Link to="/">Go home</Link>
       </div>
       <Switch>
         <Route path="/" exact component={NowPlaying} />
-        <Route path="/Completed" component={() => <AnimeList list={lists ? lists[0] : null} />} />
+        <Route
+          path="/lists/:listName"
+          render={(props) => <AnimeList url={props.match.url} lists={lists || null} />}
+        />
       </Switch>
     </HashRouter>
   );

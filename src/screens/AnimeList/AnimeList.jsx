@@ -1,15 +1,16 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 
-export default function AnimeList({ list }) {
-  console.log(list);
-
+export default function AnimeList({ lists, url }) {
+  if (lists) {
+    [lists] = lists.filter((item) => `/lists/${item.name.toLowerCase()}` === url);
+  }
   return (
     <div>
-      <h1>This is an Anime List</h1>
-      {list && (
+      <h1>{url}</h1>
+      {lists && (
         <ul>
-          {list.entries.map((value, index) => (
+          {lists.entries.map((value, index) => (
             <li key={index}>{value.media.title.romaji}</li>
           ))}
         </ul>
