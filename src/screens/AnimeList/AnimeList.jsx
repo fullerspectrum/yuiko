@@ -1,16 +1,22 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function AnimeList({ lists, url }) {
-  if (lists) {
-    [lists] = lists.filter((item) => `/lists/${item.name.toLowerCase()}` === url);
-  }
+  AnimeList.propTypes = {
+    lists: PropTypes.arrayOf(PropTypes.object),
+    url: PropTypes.string,
+  };
+  AnimeList.defaultProps = {
+    lists: [],
+    url: '',
+  };
+  const [list] = lists.filter((item) => `/lists/${item.name.toLowerCase()}` === url);
   return (
     <div>
       <h1>{url}</h1>
-      {lists && (
+      {list && (
         <ul>
-          {lists.entries.map((value, index) => (
+          {list.entries.map((value, index) => (
             <li key={index}>{value.media.title.romaji}</li>
           ))}
         </ul>
