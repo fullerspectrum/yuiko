@@ -5,8 +5,8 @@ import { gql } from 'apollo-boost';
 import os from 'os';
 import { getViewer, getAnimeList } from './lib/anilist';
 import './index.css';
-import AnimeList from './screens/AnimeList';
-import NotAnimeList from './screens/NotAnimeList';
+import AnimeList from './screens/AnimeList/AnimeList';
+import NowPlaying from './screens/NowPlaying/NowPlaying';
 
 export default function Yuiko() {
   const {
@@ -44,13 +44,15 @@ export default function Yuiko() {
 
   return (
     <HashRouter>
-      <h1>{viewer ? viewer.name : ''}</h1>
-      <Link to="/Watching">Go to an Anime List</Link>
-      <p />
-      <Link to="/">Go home</Link>
+      <div className="main">
+        <h1>{viewer ? viewer.name : 'I am not connected to anilist.'}</h1>
+        <Link to="/Completed">Go to an Anime List</Link>
+        <p />
+        <Link to="/">Go home</Link>
+      </div>
       <Switch>
-        <Route path="/" exact component={NotAnimeList} />
-        <Route path="/Watching" component={AnimeList} />
+        <Route path="/" exact component={NowPlaying} />
+        <Route path="/Completed" component={() => <AnimeList list={lists ? lists[0] : null} />} />
       </Switch>
     </HashRouter>
   );
