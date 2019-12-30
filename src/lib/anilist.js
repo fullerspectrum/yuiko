@@ -17,7 +17,12 @@ module.exports = {
             }
           }
         }
+        name
+        isCustomList
+        isSplitCompletedList
+        status
       }
+      hasNextChunk
     }
   }`,
 };
