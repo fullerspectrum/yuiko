@@ -60,7 +60,7 @@ export default function Yuiko() {
         <Route path="/" exact component={NowPlaying} />
         <Route
           path="/lists/:listName"
-          render={(props) => <AnimeList url={props.match.url} lists={lists || null} />}
+          render={(props) => <AnimeList url={props.match.url} lists={lists || []} />}
         />
       </Switch>
     </HashRouter>
