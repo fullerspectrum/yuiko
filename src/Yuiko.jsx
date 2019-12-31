@@ -7,6 +7,7 @@ import { getViewer, getAnimeList } from './lib/anilist';
 import './Yuiko.css';
 import AnimeList from './screens/AnimeList/AnimeList';
 import NowPlaying from './screens/NowPlaying/NowPlaying';
+import { remote } from 'electron';
 
 export default function Yuiko() {
   const {
@@ -44,20 +45,24 @@ export default function Yuiko() {
 
   return (
     <HashRouter>
-      <div>
-        <h1>{viewer ? viewer.name : 'I am not connected to anilist.'}</h1>
-        <p />
-        <Link to="/">Go home </Link>
-        {/* reminder to put a default list in a settings files later. */}
-        <Link to="/lists/watching">Go to your main list</Link>
+      <div style={{ display: 'flex' }}>
+        <ul>
+          <li>
+            <Link to="/">Now Playing</Link>
+          </li>
+          {/* reminder to put a default list in a settings files later. */}
+          <li>
+            <Link to="/lists/watching">Anime List</Link>
+          </li>
+        </ul>
+        <Switch>
+          <Route path="/" exact component={NowPlaying} />
+          <Route
+            path="/lists/:listName"
+            render={(props) => <AnimeList url={props.match.url} lists={lists || []} />}
+          />
+        </Switch>
       </div>
-      <Switch>
-        <Route path="/" exact component={NowPlaying} />
-        <Route
-          path="/lists/:listName"
-          render={(props) => <AnimeList url={props.match.url} lists={lists || []} />}
-        />
-      </Switch>
     </HashRouter>
   );
 }

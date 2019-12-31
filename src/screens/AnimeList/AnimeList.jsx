@@ -14,9 +14,9 @@ export default function AnimeList({ lists, url }) {
   };
   const [list] = lists.filter((item) => `/lists/${item.name.toLowerCase()}` === url);
   return (
-    <div>
+    <div className="topnav">
       {lists && (
-        <div className="topnav">
+        <div>
           <ul>
             {lists.map((item, index) => (
               <li>
@@ -28,13 +28,14 @@ export default function AnimeList({ lists, url }) {
           </ul>
         </div>
       )}
-      <h1>{url}</h1>
       {list && (
-        <ul>
-          {list.entries.map((value, index) => (
-            <li key={index}>{value.media.title.romaji}</li>
-          ))}
-        </ul>
+        <div className="content">
+          <ul>
+            {list.entries.map((value, index) => (
+              <li key={index}>{value.media.title.romaji}</li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
