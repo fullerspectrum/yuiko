@@ -9,6 +9,7 @@
   "dependencies": {
     "apollo-boost": "^0.4.4",
     "apollo-client": "^2.6.4",
+    "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
     "graphql": "^14.5.8",
     "graphql.macro": "^1.4.2",
@@ -32,7 +33,7 @@
     "build": "rescripts build",
     "test": "rescripts test",
     "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
     "electron-pack": "electron-builder build -l"
