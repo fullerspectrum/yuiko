@@ -45,24 +45,34 @@ export default function Yuiko() {
 
   return (
     <HashRouter>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', 'white-space': 'nowrap' }}>
         <ul>
           <li>
             <Link to="/">Now Playing</Link>
           </li>
           {/* reminder to put a default list in a settings files later. */}
           <li>
-            <Link to="/lists/watching">Anime List</Link>
+            <Link to="/animelists/watching">Anime List</Link>
+          </li>
+          <li>
+            <Link to="/mangalists/reading">Manga List</Link>
+          </li>
+          <li>
+            <Link to="/browse">Browse</Link>
+          </li>
+          <li>
+            <Link to="/rss">RSS Feeds</Link>
           </li>
         </ul>
         <Switch>
           <Route path="/" exact component={NowPlaying} />
           <Route
-            path="/lists/:listName"
+            path="/animelists/:listName"
             render={(props) => <AnimeList url={props.match.url} lists={lists || []} />}
           />
         </Switch>
       </div>
+      <footer>footer</footer>
     </HashRouter>
   );
 }

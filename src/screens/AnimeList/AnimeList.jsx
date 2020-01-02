@@ -12,7 +12,7 @@ export default function AnimeList({ lists, url }) {
     lists: [],
     url: '',
   };
-  const [list] = lists.filter((item) => `/lists/${item.name.toLowerCase()}` === url);
+  const [list] = lists.filter((item) => `/animelists/${item.name.toLowerCase()}` === url);
   return (
     <div className="topnav">
       {lists && (
@@ -20,7 +20,7 @@ export default function AnimeList({ lists, url }) {
           <ul>
             {lists.map((item, index) => (
               <li>
-                <Link key={index} to={() => `/lists/${item.name.toLowerCase()}`}>
+                <Link key={index} to={() => `/animelists/${item.name.toLowerCase()}`}>
                   {item.name}
                 </Link>
               </li>
