@@ -1,0 +1,52 @@
+.Yuiko {
+  display: block;
+}
+
+.Yuiko-sidemenu {
+  height: 100%;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: space-between;
+  border-right: solid 1px;
+  border-right-color: mediumslateblue;
+}
+
+.Yuiko-sidemenu ul {
+  position: static;
+  margin: 0 0 0 0;
+  padding: 0;
+  padding-right: 5px;
+  list-style-type: none;
+}
+
+.Yuiko-sidemenu a {
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.Yuiko-sidemenu a:hover {
+  color: blueviolet;
+}
+
+.Yuiko-anilist {
+}
+
+.Yuiko-settings ul {
+  margin-bottom: 30px;
+}
+
+.Yuiko-rendered_content {
+  margin-left: 96px;
+}
+
+.Yuiko-footer {
+  width: 100%;
+  position: fixed;
+  margin-top: 0px;
+  border-top: 1px solid red;
+  bottom: 0;
+}

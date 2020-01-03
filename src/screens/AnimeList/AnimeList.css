@@ -1,39 +1,31 @@
 .topnav {
-  /* display: flex; */
-  position: relative;
+  display: block;
+  margin-left: 0;
   width: 100%;
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 .topnav ul {
-  background-color: #333;
+  margin-top: 0;
+  padding: 0;
+  position: static;
   overflow: hidden;
   list-style-type: none;
+  margin-bottom: 0;
 }
 
 .topnav li {
-  margin: 0;
-}
-
-.topnav li:hover {
-  background-color: blueviolet;
 }
 
 .topnav a {
   float: left;
-  color: #f2f2f2;
-  margin: 0;
+  color: inherit;
   text-align: center;
-  padding: 7px 2%;
   text-decoration: none;
-  font-size: 14px;
+  padding: 7px 2%;
 }
 
 .topnav a:hover {
-  background-color: blueviolet;
+  color: blueviolet;
 }
 
-.content ul {
-  background-color: azure;
-}
+/* Create a separate div for the content, and keep the same padding from the .topnav a */

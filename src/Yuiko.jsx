@@ -8,6 +8,7 @@ import './Yuiko.css';
 import AnimeList from './screens/AnimeList/AnimeList';
 import NowPlaying from './screens/NowPlaying/NowPlaying';
 import { remote } from 'electron';
+import PropTypes from 'prop-types';
 
 export default function Yuiko() {
   const {
@@ -45,34 +46,56 @@ export default function Yuiko() {
 
   return (
     <HashRouter>
-      <div style={{ display: 'flex', 'white-space': 'nowrap' }}>
-        <ul>
-          <li>
-            <Link to="/">Now Playing</Link>
-          </li>
-          {/* reminder to put a default list in a settings files later. */}
-          <li>
-            <Link to="/animelists/watching">Anime List</Link>
-          </li>
-          <li>
-            <Link to="/mangalists/reading">Manga List</Link>
-          </li>
-          <li>
-            <Link to="/browse">Browse</Link>
-          </li>
-          <li>
-            <Link to="/rss">RSS Feeds</Link>
-          </li>
-        </ul>
-        <Switch>
-          <Route path="/" exact component={NowPlaying} />
-          <Route
-            path="/animelists/:listName"
-            render={(props) => <AnimeList url={props.match.url} lists={lists || []} />}
-          />
-        </Switch>
+      <div className="Yuiko">
+        <div className="Yuiko-sidemenu">
+          <div className="Yuiko-anilist">
+            <ul>
+              <li>
+                <Link to="/">Now Playing</Link>
+              </li>
+              {/* reminder to put a default list in a settings files later. */}
+              <li>
+                <Link to="/animelists/watching">Anime List</Link>
+              </li>
+              <li>
+                <Link to="/mangalists/reading">Manga List</Link>
+              </li>
+              <li>
+                <Link to="/browse">Browse</Link>
+              </li>
+              <li>
+                <Link to="/rss">RSS Feeds</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="Yuiko-settings">
+            <ul>
+              <li>
+                <Link to="/settings">Settings</Link>
+              </li>
+              <li>
+                <Link to="/settings">Settings</Link>
+              </li>
+              <li>
+                <Link to="/settings">Settings</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="Yuiko-rendered_content">
+          <Switch>
+            <Route path="/" exact component={NowPlaying} />
+            <Route
+              path="/animelists/:listName"
+              // eslint-disable-next-line react/prop-types
+              render={(props) => <AnimeList url={props.match.url} lists={lists || []} />}
+            />
+          </Switch>
+        </div>
+        <div className="Yuiko-footer">
+          <footer>footer</footer>
+        </div>
       </div>
-      <footer>footer</footer>
     </HashRouter>
   );
 }
