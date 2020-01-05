@@ -1,8 +1,9 @@
 import React from 'react';
+import './NowPlaying.css';
 
 export default function NowPlaying() {
   return (
-    <div style={{ margin: '10px', width: '100%' }}>
+    <div className="NowPlaying">
       <p>Soon(TM)</p>
     </div>
   );

@@ -1,31 +1,36 @@
-.topnav {
+.AnimeList-navbar {
+  background-color: #121212;
+  position: fixed;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
   display: block;
   margin-left: 0;
+  padding-top: 14px;
+  padding-bottom: 14px;
   width: 100%;
 }
 
-.topnav ul {
-  margin-top: 0;
-  padding: 0;
-  position: static;
-  overflow: hidden;
-  list-style-type: none;
-  margin-bottom: 0;
-}
-
-.topnav li {
-}
-
-.topnav a {
-  float: left;
+.AnimeList-navbar a {
   color: inherit;
   text-align: center;
   text-decoration: none;
-  padding: 7px 2%;
+  padding: 0 14px 0 14px;
 }
 
-.topnav a:hover {
+.AnimeList-navbar a:hover {
   color: blueviolet;
 }
 
+.AnimeList-content {
+  display: inline-block;
+  margin-top: 49px;
+  margin-bottom: 25px;
+}
+
+.AnimeList-content ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 /* Create a separate div for the content, and keep the same padding from the .topnav a */

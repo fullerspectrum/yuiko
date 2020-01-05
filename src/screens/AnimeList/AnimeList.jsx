@@ -12,26 +12,28 @@ export default function AnimeList({ lists, url }) {
     lists: [],
     url: '',
   };
-  const [list] = lists.filter((item) => `/animelists/${item.name.toLowerCase()}` === url);
+  const [list] = lists.filter((item) => `/animelists/${item.name}` === url);
   return (
-    <div className="topnav">
+    <div>
       {lists && (
-        <ul>
-          {lists.map((item, index) => (
-            <li>
-              <Link key={index} to={() => `/animelists/${item.name.toLowerCase()}`}>
+        <div className="AnimeList-navbar">
+          <nav>
+            {lists.map((item, index) => (
+              <Link key={index} to={() => `/animelists/${item.name}`}>
                 {item.name}
               </Link>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </nav>
+        </div>
       )}
       {list && (
-        <ul>
-          {list.entries.map((value, index) => (
-            <li key={index}>{value.media.title.romaji}</li>
-          ))}
-        </ul>
+        <div className="AnimeList-content">
+          <ul>
+            {list.entries.map((value, index) => (
+              <li key={index}>{value.media.title.romaji}</li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

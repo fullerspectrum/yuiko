@@ -1,25 +1,41 @@
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #272727;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #575757;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b16ecf;
+}
+
 .Yuiko {
   display: block;
 }
 
 .Yuiko-sidemenu {
-  height: 100%;
-  display: flex;
-  position: fixed;
-  flex-direction: column;
-  flex-wrap: wrap;
   align-content: space-between;
-  justify-content: space-between;
   border-right: solid 1px;
   border-right-color: mediumslateblue;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: space-between;
+  position: fixed;
 }
 
 .Yuiko-sidemenu ul {
-  position: static;
-  margin: 0 0 0 0;
   padding: 0;
   padding-right: 5px;
   list-style-type: none;
+  margin: 0 0 0 0;
 }
 
 .Yuiko-sidemenu a {
@@ -32,11 +48,9 @@
   color: blueviolet;
 }
 
-.Yuiko-anilist {
-}
-
 .Yuiko-settings ul {
-  margin-bottom: 30px;
+  bottom: 30px;
+  position: relative;
 }
 
 .Yuiko-rendered_content {
@@ -44,9 +58,9 @@
 }
 
 .Yuiko-footer {
-  width: 100%;
-  position: fixed;
-  margin-top: 0px;
   border-top: 1px solid red;
   bottom: 0;
+  margin-top: 0px;
+  position: fixed;
+  width: 100%;
 }

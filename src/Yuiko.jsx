@@ -42,23 +42,23 @@ export default function Yuiko() {
     else if (viewer) {
       document.title = `Yuiko at ${os.platform()}. Welcome, ${viewer.name}!`;
     }
-  }, [isLoadingSession, viewer, sessionError, sessionStatus]);
+  }, [isLoadingSession, viewer, sessionError, sessionStatus, lists]);
 
   return (
     <HashRouter>
       <div className="Yuiko">
         <div className="Yuiko-sidemenu">
-          <div className="Yuiko-anilist">
+          <div>
             <ul>
               <li>
                 <Link to="/">Now Playing</Link>
               </li>
               {/* reminder to put a default list in a settings files later. */}
               <li>
-                <Link to="/animelists/watching">Anime List</Link>
+                <Link to="/animelists/Watching">Anime List</Link>
               </li>
               <li>
-                <Link to="/mangalists/reading">Manga List</Link>
+                <Link to="/mangalists/Reading">Manga List</Link>
               </li>
               <li>
                 <Link to="/browse">Browse</Link>
@@ -74,10 +74,7 @@ export default function Yuiko() {
                 <Link to="/settings">Settings</Link>
               </li>
               <li>
-                <Link to="/settings">Settings</Link>
-              </li>
-              <li>
-                <Link to="/settings">Settings</Link>
+                <Link to="/setup">Setup</Link>
               </li>
             </ul>
           </div>
