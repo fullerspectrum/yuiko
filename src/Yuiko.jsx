@@ -3,12 +3,12 @@ import { HashRouter, Route, Switch, Link } from 'react-router-dom';
 import { useQuery } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import os from 'os';
+import { remote } from 'electron';
+import PropTypes from 'prop-types';
 import { getViewer, getAnimeList } from './lib/anilist';
 import './Yuiko.css';
 import AnimeList from './screens/AnimeList/AnimeList';
 import NowPlaying from './screens/NowPlaying/NowPlaying';
-import { remote } from 'electron';
-import PropTypes from 'prop-types';
 
 export default function Yuiko() {
   const {

@@ -18,8 +18,8 @@ export default function AnimeList({ lists, url }) {
       {lists && (
         <div className="AnimeList-navbar">
           <nav>
-            {lists.map((item, index) => (
-              <Link key={index} to={() => `/animelists/${item.name}`}>
+            {lists.map((item) => (
+              <Link key={item.name} to={() => `/animelists/${item.name}`}>
                 {item.name}
               </Link>
             ))}
@@ -29,8 +29,8 @@ export default function AnimeList({ lists, url }) {
       {list && (
         <div className="AnimeList-content">
           <ul>
-            {list.entries.map((value, index) => (
-              <li key={index}>{value.media.title.romaji}</li>
+            {list.entries.map((value) => (
+              <li key={value.media.title.romaji}>{value.media.title.romaji}</li>
             ))}
           </ul>
         </div>

@@ -8,7 +8,8 @@
   margin-left: 0;
   padding-top: 14px;
   padding-bottom: 14px;
-  max-width: calc(100% - 90px);
+  max-width: calc(100vw - 96px);
+  /* max-width: calc(100% - 96px); */
 }
 
 .AnimeList-navbar a {
