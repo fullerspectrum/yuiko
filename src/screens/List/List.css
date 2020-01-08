@@ -1,5 +1,5 @@
-.AnimeList-navbar {
-  background-color: #121212;
+.List-navbar {
+  background-color: var(--foreground);
   position: fixed;
   overflow-x: auto;
   overflow-y: hidden;
@@ -8,28 +8,27 @@
   margin-left: 0;
   padding-top: 14px;
   padding-bottom: 14px;
-  max-width: calc(100vw - 96px);
-  /* max-width: calc(100% - 96px); */
+  max-width: calc(100vw - 93px);
 }
 
-.AnimeList-navbar a {
+.List-navbar a {
   color: inherit;
   text-align: center;
   text-decoration: none;
   padding: 0 14px 0 14px;
 }
 
-.AnimeList-navbar a:hover {
-  color: blueviolet;
+.List-navbar a:hover {
+  color: var(--primary-light);
 }
 
-.AnimeList-content {
+.List-content {
   display: inline-block;
   margin-top: 55px;
   margin-bottom: 25px;
 }
 
-.AnimeList-content ul {
+.List-content ul {
   list-style-type: none;
   margin: 0;
   padding: 0;

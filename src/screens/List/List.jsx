@@ -1,25 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './AnimeList.css';
+import './List.css';
 
-export default function AnimeList({ lists, url }) {
-  AnimeList.propTypes = {
+export default function List({ lists, url, type }) {
+  List.propTypes = {
     lists: PropTypes.arrayOf(PropTypes.object),
     url: PropTypes.string,
+    type: PropTypes.string,
   };
-  AnimeList.defaultProps = {
+  List.defaultProps = {
     lists: [],
     url: '',
+    type: 'animelist',
   };
-  const [list] = lists.filter((item) => `/animelists/${item.name}` === url);
+  const [list] = lists.filter((item) => `/${type}/${item.name}` === url);
   return (
     <div>
       {lists && (
-        <div className="AnimeList-navbar">
+        <div className="List-navbar">
           <nav>
             {lists.map((item) => (
-              <Link key={item.name} to={() => `/animelists/${item.name}`}>
+              <Link key={item.name} to={() => `/${type}/${item.name}`}>
                 {item.name}
               </Link>
             ))}
@@ -27,7 +29,7 @@ export default function AnimeList({ lists, url }) {
         </div>
       )}
       {list && (
-        <div className="AnimeList-content">
+        <div className="List-content">
           <ul>
             {list.entries.map((value) => (
               <li key={value.media.title.romaji}>{value.media.title.romaji}</li>
