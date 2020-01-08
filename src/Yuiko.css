@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 ::-webkit-scrollbar {
   height: 5px;
   width: 5px;
@@ -12,7 +18,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b16ecf;
+  background: var(--primary-light);
 }
 
 .Yuiko {
@@ -20,9 +26,8 @@
 }
 
 .Yuiko-sidemenu {
+  background-color: var(--foreground);
   align-content: space-between;
-  border-right: solid 1px;
-  border-right-color: mediumslateblue;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -45,7 +50,7 @@
 }
 
 .Yuiko-sidemenu a:hover {
-  color: blueviolet;
+  color: var(--primary-light);
 }
 
 .Yuiko-settings ul {
@@ -54,13 +59,14 @@
 }
 
 .Yuiko-rendered_content {
-  margin-left: 96px;
+  margin-left: 93px;
 }
 
 .Yuiko-footer {
-  border-top: 1px solid red;
   bottom: 0;
+  background-color: var(--foreground);
   margin-top: 0px;
   position: fixed;
   width: 100%;
+  /* clip-path: circle(); */
 }
