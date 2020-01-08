@@ -7,7 +7,7 @@ import { remote } from 'electron';
 import PropTypes from 'prop-types';
 import { getViewer, getAnimeList } from './lib/anilist';
 import './Yuiko.css';
-import AnimeList from './screens/AnimeList/AnimeList';
+import List from './screens/List/List';
 import NowPlaying from './screens/NowPlaying/NowPlaying';
 
 export default function Yuiko() {
@@ -53,12 +53,12 @@ export default function Yuiko() {
               <li>
                 <Link to="/">Now Playing</Link>
               </li>
-              {/* reminder to put a default list in a settings files later. */}
+              {/* reminder to put a default list in a settings file later. */}
               <li>
-                <Link to="/animelists/Watching">Anime List</Link>
+                <Link to="/animelist/Watching">Anime List</Link>
               </li>
               <li>
-                <Link to="/mangalists/Reading">Manga List</Link>
+                <Link to="/mangalist/Reading">Manga List</Link>
               </li>
               <li>
                 <Link to="/browse">Browse</Link>
@@ -83,9 +83,8 @@ export default function Yuiko() {
           <Switch>
             <Route path="/" exact component={NowPlaying} />
             <Route
-              path="/animelists/:listName"
-              // eslint-disable-next-line react/prop-types
-              render={(props) => <AnimeList url={props.match.url} lists={lists || []} />}
+              path="/animelist/:listName"
+              render={({ match }) => <List url={match.url} lists={lists || []} />}
             />
           </Switch>
         </div>
