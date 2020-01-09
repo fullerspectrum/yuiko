@@ -1,19 +1,19 @@
 .List-navbar {
   background-color: var(--foreground);
-  position: fixed;
+  margin-left: 0;
   overflow-x: auto;
   overflow-y: hidden;
-  white-space: nowrap;
-  margin-left: 0;
   padding: 14px 0;
+  position: fixed;
+  white-space: nowrap;
   width: calc(100vw - 93px);
 }
 
 .List-navbar a {
   color: inherit;
+  padding: 0 14px 0 14px;
   text-align: center;
   text-decoration: none;
-  padding: 0 14px 0 14px;
 }
 
 .List-navbar a:hover {
@@ -31,4 +31,3 @@
   margin: 0;
   padding: 0;
 }
-/* Create a separate div for the content, and keep the same padding from the .topnav a */
