@@ -4,11 +4,9 @@
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  display: block;
   margin-left: 0;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  max-width: calc(100vw - 93px);
+  padding: 14px 0;
+  width: calc(100vw - 93px);
 }
 
 .List-navbar a {

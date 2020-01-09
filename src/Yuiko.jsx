@@ -26,7 +26,7 @@ export default function Yuiko() {
   const {
     loading: isLoadingList,
     error: listFetchError,
-    data: { MediaListCollection: { lists, hasNextChunk } = {} } = {},
+    data: { MediaListCollection: { lists: [...animelists] = [], hasNextChunk } = {} } = {},
     refetch: listRefetch,
   } = useQuery(gql(getAnimeList), {
     notifyOnNetworkStatusChange: true,
@@ -42,7 +42,7 @@ export default function Yuiko() {
     else if (viewer) {
       document.title = `Yuiko at ${os.platform()}. Welcome, ${viewer.name}!`;
     }
-  }, [isLoadingSession, viewer, sessionError, sessionStatus, lists]);
+  }, [isLoadingSession, viewer, sessionError, sessionStatus, animelists]);
 
   return (
     <HashRouter>
@@ -83,8 +83,17 @@ export default function Yuiko() {
           <Switch>
             <Route path="/" exact component={NowPlaying} />
             <Route
-              path="/animelist/:listName"
-              render={({ match }) => <List url={match.url} lists={lists || []} />}
+              path="/:listType/:listName"
+              render={({ match }) => (
+                <List
+                  url={match.url}
+                  params={match.params}
+                  lists={(() => {
+                    if (match.params.listType === 'animelist' && animelists) return animelists;
+                    return [];
+                  })()}
+                />
+              )}
             />
           </Switch>
         </div>
