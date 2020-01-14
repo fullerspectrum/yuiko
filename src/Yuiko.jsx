@@ -121,11 +121,7 @@ export default function Yuiko() {
             />
           </Switch>
         </div>
-        {isLoadingList && (
-          <div className="Yuiko-footer">
-            <p>Sync in progress</p>
-          </div>
-        )}
+        <div className="Yuiko-footer">{isLoadingList && <p>Sync in progress</p>}</div>
       </div>
     </HashRouter>
   );
