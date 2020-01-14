@@ -42,7 +42,23 @@ export default function Yuiko() {
     else if (viewer) {
       document.title = `Yuiko at ${os.platform()}. Welcome, ${viewer.name}!`;
     }
-  }, [isLoadingSession, viewer, sessionError, sessionStatus, animelists]);
+  }, [isLoadingSession, viewer, sessionStatus, animelists]);
+
+  function handleSetup() {
+    const win = new remote.BrowserWindow();
+    win.loadURL('https://anilist.co/api/v2/oauth/authorize?client_id=2775&response_type=token');
+    win.on('page-title-updated', () => {
+      if (win.webContents.getURL().startsWith('https://yuiko.moe')) {
+        console.log(win.webContents.getURL());
+        win.close();
+      }
+    });
+    win.on('close', () => {});
+    win.on('closed', () => {
+      const ses = remote.session.defaultSession;
+      ses.clearStorageData({ origin: 'https://anilist.co', storages: ['cookies'] });
+    });
+  }
 
   return (
     <HashRouter>
@@ -74,11 +90,19 @@ export default function Yuiko() {
                 <Link to="/settings">Settings</Link>
               </li>
               <li>
-                <Link to="/setup">Setup</Link>
+                <button type="button" onClick={() => handleSetup()}>
+                  Setup
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => listRefetch()}>
+                  Sync
+                </button>
               </li>
             </ul>
           </div>
         </div>
+
         <div className="Yuiko-rendered_content">
           <Switch>
             <Route path="/" exact component={NowPlaying} />
@@ -97,9 +121,11 @@ export default function Yuiko() {
             />
           </Switch>
         </div>
-        <div className="Yuiko-footer">
-          <footer>footer</footer>
-        </div>
+        {isLoadingList && (
+          <div className="Yuiko-footer">
+            <p>Sync in progress</p>
+          </div>
+        )}
       </div>
     </HashRouter>
   );

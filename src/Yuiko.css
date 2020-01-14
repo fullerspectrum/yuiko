@@ -53,9 +53,19 @@
   color: var(--primary-light);
 }
 
-.Yuiko-settings ul {
-  bottom: 30px;
-  position: relative;
+.Yuiko-settings button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+  padding: inherit;
+  margin: inherit;
+}
+
+.Yuiko-settings button:hover {
+  color: var(--primary-light);
 }
 
 .Yuiko-rendered_content {
