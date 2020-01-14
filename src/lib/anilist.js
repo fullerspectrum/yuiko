@@ -15,7 +15,10 @@ module.exports = {
             title {
               romaji
             }
+            format
           }
+          progress
+          score
         }
         name
         isCustomList
