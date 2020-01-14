@@ -33,6 +33,7 @@ export default function List({ lists, params }) {
           <ListContainer>
             {list.entries.map((value) => (
               <ListEntry
+                key={value.media.title.romaji}
                 data={{
                   title: value.media.title.romaji,
                   progress: value.progress,
