@@ -45,7 +45,7 @@ export default function Yuiko() {
   }, [isLoadingSession, viewer, sessionStatus, animelists]);
 
   function handleSetup() {
-    const win = new remote.BrowserWindow();
+    let win = new remote.BrowserWindow();
     win.loadURL('https://anilist.co/api/v2/oauth/authorize?client_id=2775&response_type=token');
     win.on('page-title-updated', () => {
       if (win.webContents.getURL().startsWith('https://yuiko.moe')) {
@@ -53,10 +53,10 @@ export default function Yuiko() {
         win.close();
       }
     });
-    win.on('close', () => {});
     win.on('closed', () => {
       const ses = remote.session.defaultSession;
       ses.clearStorageData({ origin: 'https://anilist.co', storages: ['cookies'] });
+      win = null;
     });
   }
 
