@@ -16,6 +16,7 @@ module.exports = {
               romaji
             }
             format
+            episodes
           }
           progress
           score
