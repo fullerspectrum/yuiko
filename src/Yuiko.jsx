@@ -3,8 +3,8 @@ import { HashRouter, Route, Switch, Link } from 'react-router-dom';
 import { useQuery } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import os from 'os';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
-import PropTypes from 'prop-types';
 import { getViewer, getAnimeList } from './lib/anilist';
 import './Yuiko.css';
 import List from './screens/List/List';
