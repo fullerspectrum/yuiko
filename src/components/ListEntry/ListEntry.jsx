@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function AnimeEntry({ data }) {
-  AnimeEntry.propTypes = {
+export default function ListEntry({ data }) {
+  ListEntry.propTypes = {
     data: PropTypes.shape({
       title: PropTypes.string,
       progress: PropTypes.number,
@@ -11,7 +11,7 @@ export default function AnimeEntry({ data }) {
       type: PropTypes.string,
     }),
   };
-  AnimeEntry.defaultProps = {
+  ListEntry.defaultProps = {
     data: {},
   };
   return (
