@@ -44,7 +44,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-app.on('browser-window-created', (event, window) => {
-  window.setAutoHideMenuBar(true);
-});
