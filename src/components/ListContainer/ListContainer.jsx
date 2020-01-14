@@ -8,7 +8,7 @@ export default function ListContainer({ children }) {
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   };
   ListContainer.defaultProps = {
-    children: null,
+    children: undefined,
   };
 
   return (
