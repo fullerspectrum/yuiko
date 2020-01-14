@@ -45,7 +45,7 @@ export default function Yuiko() {
   }, [isLoadingSession, viewer, sessionStatus, animelists]);
 
   function handleSetup() {
-    let win = new remote.BrowserWindow();
+    let win = new remote.BrowserWindow({ autoHideMenuBar: true, width: 400, height: 550 });
     win.loadURL('https://anilist.co/api/v2/oauth/authorize?client_id=2775&response_type=token');
     win.on('page-title-updated', () => {
       if (win.webContents.getURL().startsWith('https://yuiko.moe')) {
