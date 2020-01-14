@@ -11,5 +11,4 @@ tr {
 td {
   max-width: 500px;
   overflow-wrap: break-word;
-  border: 1px solid var(--font-color);
 }
