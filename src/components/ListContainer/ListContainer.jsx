@@ -1,5 +1,4 @@
 import React from 'react';
-import Resizer from 'react-column-resizer';
 import PropTypes from 'prop-types';
 import './ListContainer.css';
 
