@@ -1,0 +1,15 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+
+tr {
+  background-color: var(--foreground);
+  padding-bottom: 50px;
+}
+
+td {
+  max-width: 500px;
+  overflow-wrap: break-word;
+  border: 1px solid var(--font-color);
+}
