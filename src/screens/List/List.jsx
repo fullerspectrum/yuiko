@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './List.css';
+import ListContainer from '../../components/ListContainer/ListContainer';
+import ListEntry from '../../components/ListEntry/ListEntry';
 
 export default function List({ lists, params }) {
   List.propTypes = {
@@ -19,7 +21,7 @@ export default function List({ lists, params }) {
         <div className="List-navbar">
           <nav>
             {lists.map((item) => (
-              <Link key={item.name} to={() => `/${params.listType}/${item.name}`}>
+              <Link id={item.name} key={item.name} to={() => `/${params.listType}/${item.name}`}>
                 {item.name}
               </Link>
             ))}
@@ -28,11 +30,18 @@ export default function List({ lists, params }) {
       )}
       {list && (
         <div className="List-content">
-          <ul>
+          <ListContainer>
             {list.entries.map((value) => (
-              <li key={value.media.title.romaji}>{value.media.title.romaji}</li>
+              <ListEntry
+                data={{
+                  title: value.media.title.romaji,
+                  progress: value.progress,
+                  score: value.score,
+                  type: value.media.format,
+                }}
+              />
             ))}
-          </ul>
+          </ListContainer>
         </div>
       )}
     </div>
