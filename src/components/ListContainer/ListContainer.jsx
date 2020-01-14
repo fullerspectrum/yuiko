@@ -12,13 +12,15 @@ export default function ListContainer({ children }) {
 
   return (
     <table>
-      <tr>
-        <td>Title</td>
-        <td style={{ paddingRight: '40px' }}>Progress</td>
-        <td style={{ paddingRight: '40px' }}>Score</td>
-        <td style={{ paddingRight: '40px' }}>Type</td>
-      </tr>
-      {children}
+      <tbody>
+        <tr>
+          <td>Title</td>
+          <td style={{ paddingRight: '40px' }}>Progress</td>
+          <td style={{ paddingRight: '40px' }}>Score</td>
+          <td style={{ paddingRight: '40px' }}>Type</td>
+        </tr>
+        {children}
+      </tbody>
     </table>
   );
 }
