@@ -6,6 +6,7 @@ export default function AnimeEntry({ data }) {
     data: PropTypes.shape({
       title: PropTypes.string,
       progress: PropTypes.number,
+      episodes: PropTypes.number,
       score: PropTypes.number,
       type: PropTypes.string,
     }),
@@ -19,7 +20,7 @@ export default function AnimeEntry({ data }) {
         {data.title}
       </td>
       <td id={`progress-${data.title}`} key={`progress-${data.title}`}>
-        {data.progress}
+        {`${data.progress}/${data.episodes}`}
       </td>
       <td id={`score-${data.title}`} key={`score-${data.title}`}>
         {data.score === 0 ? '-' : data.score}

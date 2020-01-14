@@ -36,6 +36,7 @@ export default function List({ lists, params }) {
                 data={{
                   title: value.media.title.romaji,
                   progress: value.progress,
+                  episodes: value.media.episodes,
                   score: value.score,
                   type: value.media.format,
                 }}
