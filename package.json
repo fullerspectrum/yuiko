@@ -11,6 +11,7 @@
     "apollo-client": "^2.6.4",
     "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
+    "electron-json-storage": "^4.1.8",
     "graphql": "^14.5.8",
     "graphql.macro": "^1.4.2",
     "lodash": "^4.17.15",
@@ -37,7 +38,7 @@
     "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
-    "electron-pack": "electron-builder build -l"
+    "electron-pack": "electron-builder build -wl"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -83,7 +84,7 @@
   "build": {
     "appId": "moe.yuiko.desktop",
     "productName": "Yuiko",
-    "copyright": "Copyright © 2019 ${author}",
+    "copyright": "Copyright © 2019-2020 ${author}",
     "mac": {
       "category": "public.app-category.utilities"
     },
