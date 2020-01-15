@@ -6,29 +6,45 @@ import './index.css';
 import { readFileSync } from 'fs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
+import storage from 'electron-json-storage';
 import Yuiko from './Yuiko';
 import * as serviceWorker from './serviceWorker';
 
-const { token } = JSON.parse(
-  readFileSync(`${remote.app.getPath('appData')}/yuiko/credentials.json`),
-);
-
-const client = new ApolloClient({
-  uri: 'https://graphql.anilist.co',
-  request: (operation) => {
-    operation.setContext({
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
+function storageGetPromise(key) {
+  return new Promise((resolve, reject) => {
+    storage.get(key, (error, data) => {
+      if (error) return reject(error);
+      return resolve(data);
     });
-  },
-});
+  });
+}
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Yuiko />
-  </ApolloProvider>,
-  document.getElementById('root'),
-);
+async function start() {
+  let token = '';
+  try {
+    token = (await storageGetPromise('token')).token;
+  } catch (error) {
+    console.error(error);
+  }
+  const client = new ApolloClient({
+    uri: 'https://graphql.anilist.co',
+    request: (operation) => {
+      operation.setContext({
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+    },
+  });
 
-serviceWorker.register();
+  ReactDOM.render(
+    <ApolloProvider client={client}>
+      <Yuiko />
+    </ApolloProvider>,
+    document.getElementById('root'),
+  );
+
+  serviceWorker.register();
+}
+
+start();

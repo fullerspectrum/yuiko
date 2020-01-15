@@ -3,8 +3,10 @@ import { HashRouter, Route, Switch, Link } from 'react-router-dom';
 import { useQuery } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import os from 'os';
+import url from 'url';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
+import storage from 'electron-json-storage';
 import { getViewer, getAnimeList } from './lib/anilist';
 import './Yuiko.css';
 import List from './screens/List/List';
@@ -49,7 +51,12 @@ export default function Yuiko() {
     win.loadURL('https://anilist.co/api/v2/oauth/authorize?client_id=2775&response_type=token');
     win.on('page-title-updated', () => {
       if (win.webContents.getURL().startsWith('https://yuiko.moe')) {
-        console.log(win.webContents.getURL());
+        storage.set('token', {
+          token: url
+            .parse(win.webContents.getURL())
+            .hash.split('&')[0]
+            .substring(14),
+        });
         win.close();
       }
     });
