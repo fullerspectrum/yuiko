@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import './index.css';
-import { readFileSync } from 'fs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
 import storage from 'electron-json-storage';
