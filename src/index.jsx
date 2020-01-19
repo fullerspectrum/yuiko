@@ -19,32 +19,23 @@ function storageGetPromise(key) {
   });
 }
 
-async function start() {
-  let token = '';
-  try {
-    token = (await storageGetPromise('token')).token;
-  } catch (error) {
-    console.error(error);
-  }
-  const client = new ApolloClient({
-    uri: 'https://graphql.anilist.co',
-    request: (operation) => {
-      operation.setContext({
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-    },
-  });
+const client = new ApolloClient({
+  uri: 'https://graphql.anilist.co',
+  request: async (operation) => {
+    const { token } = await storageGetPromise('token');
+    operation.setContext({
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
+});
 
-  ReactDOM.render(
-    <ApolloProvider client={client}>
-      <Yuiko />
-    </ApolloProvider>,
-    document.getElementById('root'),
-  );
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <Yuiko />
+  </ApolloProvider>,
+  document.getElementById('root'),
+);
 
-  serviceWorker.register();
-}
-
-start();
+serviceWorker.register();
