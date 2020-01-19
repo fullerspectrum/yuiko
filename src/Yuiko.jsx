@@ -9,8 +9,10 @@ import { remote } from 'electron';
 import storage from 'electron-json-storage';
 import { getViewer, getAnimeList } from './lib/anilist';
 import './Yuiko.css';
-import List from './screens/List/List';
-import NowPlaying from './screens/NowPlaying/NowPlaying';
+import List from './screens/List';
+import NowPlaying from './screens/NowPlaying';
+
+// add title and custom buttons (login, not logged in/loading logout)
 
 export default function Yuiko() {
   const {

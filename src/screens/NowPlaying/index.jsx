@@ -1,5 +1,5 @@
 import React from 'react';
-import './NowPlaying.css';
+import './styles.css';
 
 export default function NowPlaying() {
   return (

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './List.css';
-import ListContainer from '../../components/ListContainer/ListContainer';
-import ListEntry from '../../components/ListEntry/ListEntry';
+import './styles.css';
+import ListContainer from '../../components/ListContainer';
+import ListEntry from '../../components/ListEntry';
 
 export default function List({ lists, params }) {
   List.propTypes = {
