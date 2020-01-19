@@ -36,7 +36,6 @@
     "eject": "react-scripts eject",
     "run-no-gpu": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron --args --disable-gpu .\"",
     "run-any": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "yuiko": "yarn run-no-gpu",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
     "electron-pack": "electron-builder build -wl"
