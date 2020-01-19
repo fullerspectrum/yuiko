@@ -4,7 +4,6 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import './index.css';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { remote } from 'electron';
 import storage from 'electron-json-storage';
 import Yuiko from './Yuiko';
 import * as serviceWorker from './serviceWorker';
