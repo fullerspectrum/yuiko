@@ -14,6 +14,7 @@ import NowPlaying from './screens/NowPlaying/NowPlaying';
 
 export default function Yuiko() {
   const {
+    client,
     loading: isLoadingSession,
     networkStatus: sessionStatus,
     error: sessionError,
@@ -39,7 +40,7 @@ export default function Yuiko() {
   });
 
   useEffect(() => {
-    if (isLoadingSession) document.title = 'Loading Yuiko...';
+    if (isLoadingSession) document.title = 'Yuiko - Not logged in';
     if (sessionStatus === 8) document.title = 'error';
     else if (viewer) {
       document.title = `Yuiko at ${os.platform()}. Welcome, ${viewer.name}!`;
@@ -57,6 +58,7 @@ export default function Yuiko() {
             .hash.split('&')[0]
             .substring(14),
         });
+        client.resetStore();
         win.close();
       }
     });
@@ -98,7 +100,7 @@ export default function Yuiko() {
               </li>
               <li>
                 <button type="button" onClick={() => handleSetup()}>
-                  Setup
+                  {storage.get('token') ? 'Login' : 'Logout'}
                 </button>
               </li>
               <li>
