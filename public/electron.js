@@ -31,6 +31,7 @@ function createWindow() {
         `/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/`,
       );
       const devToolsFolderContent = fs.readdirSync(devToolsFolderPath);
+
       if (devToolsFolderContent)
         BrowserWindow.addDevToolsExtension(devToolsFolderPath.concat(devToolsFolderContent.pop()));
     }
