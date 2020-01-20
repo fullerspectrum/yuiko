@@ -1,3 +1,5 @@
+const os = require('os');
+const path = require('path');
 const { app, BrowserWindow } = require('electron');
 const { join } = require('path');
 const isDev = require('electron-is-dev');
@@ -19,11 +21,16 @@ function createWindow() {
   );
 
   if (isDev) {
-    // Open the DevTools.
     // eslint-disable-next-line no-console
     console.log('yuiko dev version running');
-    // BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
-    // mainWindow.webContents.openDevTools();
+    // add react dev tools to electron, for linux devs
+    if (os.platform === 'linux')
+      BrowserWindow.addDevToolsExtension(
+        path.join(
+          os.homedir(),
+          '.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi',
+        ),
+      );
   }
 
   mainWindow.on('closed', () => {
