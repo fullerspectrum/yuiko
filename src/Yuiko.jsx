@@ -7,14 +7,15 @@ import url from 'url';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
 import storage from 'electron-json-storage';
-import { getViewer, getAnimeList } from './lib/anilist';
+import { getViewer, getAnimeList, getMangaList } from './lib/anilist';
 import './Yuiko.css';
 import List from './screens/List';
 import NowPlaying from './screens/NowPlaying';
 
-// add title and custom buttons (login, not logged in/loading logout)
-
 export default function Yuiko() {
+  const [lists, setLists] = useState({});
+  let updateLists;
+
   const {
     client,
     loading: isLoadingSession,
@@ -25,35 +26,54 @@ export default function Yuiko() {
   } = useQuery(gql(getViewer), {
     notifyOnNetworkStatusChange: true,
   });
-
   const skip = viewer === undefined;
 
   const {
-    loading: isLoadingList,
-    error: listFetchError,
-    data: { MediaListCollection: { lists: [...animelists] = [], hasNextChunk } = {} } = {},
-    refetch: listRefetch,
+    loading: isLoadingAL,
+    error: ALFetchError,
+    data: { MediaListCollection: { lists: [...animelists] = [] } = {} } = {},
+    refetch: ALRefetch,
   } = useQuery(gql(getAnimeList), {
     notifyOnNetworkStatusChange: true,
     variables: {
       id: skip || viewer.id,
     },
     skip,
+    onCompleted: () => updateLists(),
   });
 
+  const {
+    loading: isLoadingML,
+    error: MLFetchError,
+    data: { MediaListCollection: { lists: [...mangalists] = [] } = {} } = {},
+    refetch: MLRefetch,
+  } = useQuery(gql(getMangaList), {
+    notifyOnNetworkStatusChange: true,
+    variables: {
+      id: skip || viewer.id,
+    },
+    skip,
+    onCompleted: () => updateLists(),
+  });
+
+  updateLists = () => {
+    setLists({ animelist: animelists, mangalist: mangalists });
+  };
+
   useEffect(() => {
-    if (isLoadingSession) document.title = 'Yuiko - Not logged in';
-    if (sessionStatus === 8) document.title = 'error';
+    if (isLoadingSession) document.title = `Yuiko - not online`;
+    if (sessionStatus === 8)
+      document.title = `error: ${sessionError.name} - ${sessionError.message}`;
     else if (viewer) {
       document.title = `Yuiko at ${os.platform()}. Welcome, ${viewer.name}!`;
     }
-  }, [isLoadingSession, viewer, sessionStatus, animelists]);
+  }, [isLoadingSession, sessionStatus, sessionError, viewer]);
 
-  function handleSetup() {
+  const login = () => {
     let win = new remote.BrowserWindow({ autoHideMenuBar: true, width: 400, height: 550 });
     win.loadURL('https://anilist.co/api/v2/oauth/authorize?client_id=2775&response_type=token');
     win.on('page-title-updated', () => {
-      if (win.webContents.getURL().startsWith('https://yuiko.moe')) {
+      if (win.webContents.getURL().includes('#')) {
         storage.set('token', {
           token: url
             .parse(win.webContents.getURL())
@@ -69,7 +89,14 @@ export default function Yuiko() {
       ses.clearStorageData({ origin: 'https://anilist.co', storages: ['cookies'] });
       win = null;
     });
-  }
+  };
+
+  const logout = () => {};
+
+  const handleSetup = () => {
+    if (!viewer) login();
+    else logout();
+  };
 
   return (
     <HashRouter>
@@ -102,11 +129,17 @@ export default function Yuiko() {
               </li>
               <li>
                 <button type="button" onClick={() => handleSetup()}>
-                  {storage.get('token') ? 'Login' : 'Logout'}
+                  {!viewer ? 'Login' : 'Logout'}
                 </button>
               </li>
               <li>
-                <button type="button" onClick={() => listRefetch()}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    ALRefetch();
+                    MLRefetch();
+                  }}
+                >
                   Sync
                 </button>
               </li>
@@ -120,19 +153,14 @@ export default function Yuiko() {
             <Route
               path="/:listType/:listName"
               render={({ match }) => (
-                <List
-                  url={match.url}
-                  params={match.params}
-                  lists={(() => {
-                    if (match.params.listType === 'animelist' && animelists) return animelists;
-                    return [];
-                  })()}
-                />
+                <List params={match.params} lists={lists[match.params.listType]} />
               )}
             />
           </Switch>
         </div>
-        <div className="Yuiko-footer">{isLoadingList && <p>Sync in progress</p>}</div>
+        <div className="Yuiko-footer">
+          {(isLoadingAL || isLoadingML) && <p>Sync in progress</p>}
+        </div>
       </div>
     </HashRouter>
   );

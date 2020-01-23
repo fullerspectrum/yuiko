@@ -29,4 +29,26 @@ module.exports = {
       hasNextChunk
     }
   }`,
+  getMangaList: `query($id: Int) {
+    MediaListCollection(userId: $id, type: MANGA) {
+      lists {
+        entries {
+          media {
+            title {
+              romaji
+            }
+            format
+            episodes
+          }
+          progress
+          score
+        }
+        name
+        isCustomList
+        isSplitCompletedList
+        status
+      }
+      hasNextChunk
+    }
+  }`,
 };
