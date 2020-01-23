@@ -3,13 +3,6 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 export default function ListContainer({ children }) {
-  ListContainer.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  };
-  ListContainer.defaultProps = {
-    children: undefined,
-  };
-
   return (
     <table>
       <tbody>
@@ -24,3 +17,10 @@ export default function ListContainer({ children }) {
     </table>
   );
 }
+
+ListContainer.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+};
+ListContainer.defaultProps = {
+  children: undefined,
+};

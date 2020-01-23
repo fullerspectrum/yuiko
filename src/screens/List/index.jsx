@@ -5,16 +5,9 @@ import './styles.css';
 import ListContainer from '../../components/ListContainer';
 import ListEntry from '../../components/ListEntry';
 
-export default function List({ lists, params }) {
-  List.propTypes = {
-    lists: PropTypes.arrayOf(PropTypes.object),
-    params: PropTypes.shape({ listType: PropTypes.string, listName: PropTypes.string }),
-  };
-  List.defaultProps = {
-    lists: [],
-    params: {},
-  };
-  const [list] = lists.filter((item) => item.name === params.listName);
+// think better name for function, like, listScreen or smth
+export default function list({ lists, params }) {
+  const [currentList] = lists.filter((item) => item.name === params.listName);
   return (
     <div>
       {lists && (
@@ -28,10 +21,10 @@ export default function List({ lists, params }) {
           </nav>
         </div>
       )}
-      {list && (
+      {currentList && (
         <div className="List-content">
           <ListContainer>
-            {list.entries.map((value) => (
+            {currentList.entries.map((value) => (
               <ListEntry
                 key={value.media.title.romaji}
                 data={{
@@ -49,3 +42,12 @@ export default function List({ lists, params }) {
     </div>
   );
 }
+
+list.propTypes = {
+  lists: PropTypes.arrayOf(PropTypes.object),
+  params: PropTypes.shape({ listType: PropTypes.string, listName: PropTypes.string }),
+};
+list.defaultProps = {
+  lists: [],
+  params: {},
+};
