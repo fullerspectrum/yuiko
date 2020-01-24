@@ -21,10 +21,8 @@ export default function Yuiko() {
   const {
     client,
     loading: isLoadingSession,
-    networkStatus: sessionStatus,
     error: sessionError,
     data: { Viewer: viewer } = {},
-    refetch: sessionRefetch,
   } = useQuery(gql(getViewer), {
     notifyOnNetworkStatusChange: true,
     skip: !isLoggedIn,
@@ -33,7 +31,6 @@ export default function Yuiko() {
 
   const {
     loading: isLoadingAL,
-    error: ALFetchError,
     data: { MediaListCollection: { lists: [...animelists] = [] } = {} } = {},
     refetch: ALRefetch,
   } = useQuery(gql(getAnimeList), {
@@ -51,7 +48,6 @@ export default function Yuiko() {
 
   const {
     loading: isLoadingML,
-    error: MLFetchError,
     data: { MediaListCollection: { lists: [...mangalists] = [] } = {} } = {},
     refetch: MLRefetch,
   } = useQuery(gql(getMangaList), {
