@@ -17,7 +17,6 @@ const store = new Store();
 export default function Yuiko() {
   const [lists, setLists] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(!!store.get('token'));
-  let updateLists;
 
   const {
     client,
@@ -43,7 +42,11 @@ export default function Yuiko() {
       id: skip || viewer.id,
     },
     skip,
-    onCompleted: () => updateLists(),
+    onCompleted: () => {
+      setLists((state) => {
+        return { ...state, animelist: animelists };
+      });
+    },
   });
 
   const {
@@ -57,12 +60,12 @@ export default function Yuiko() {
       id: skip || viewer.id,
     },
     skip,
-    onCompleted: () => updateLists(),
+    onCompleted: () => {
+      setLists((state) => {
+        return { ...state, mangalist: mangalists };
+      });
+    },
   });
-
-  updateLists = () => {
-    setLists({ animelist: animelists, mangalist: mangalists });
-  };
 
   useEffect(() => {
     if (isLoadingSession || !isLoggedIn) document.title = `Yuiko - not online`;
