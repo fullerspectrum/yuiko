@@ -4,16 +4,19 @@ import { useQuery } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import os from 'os';
 import url from 'url';
+import Store from 'electron-store';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
-import storage from 'electron-json-storage';
 import { getViewer, getAnimeList, getMangaList } from './lib/anilist';
 import './Yuiko.css';
 import List from './screens/List';
 import NowPlaying from './screens/NowPlaying';
 
+const store = new Store();
+
 export default function Yuiko() {
   const [lists, setLists] = useState({});
+  const [isLoggedIn, setLoggedIn] = useState(!!store.get('token'));
   let updateLists;
 
   const {
@@ -25,6 +28,7 @@ export default function Yuiko() {
     refetch: sessionRefetch,
   } = useQuery(gql(getViewer), {
     notifyOnNetworkStatusChange: true,
+    skip: !isLoggedIn,
   });
   const skip = viewer === undefined;
 
@@ -61,26 +65,26 @@ export default function Yuiko() {
   };
 
   useEffect(() => {
-    if (isLoadingSession) document.title = `Yuiko - not online`;
-    if (sessionStatus === 8)
-      document.title = `error: ${sessionError.name} - ${sessionError.message}`;
+    if (isLoadingSession || !isLoggedIn) document.title = `Yuiko - not online`;
+    if (sessionError) document.title = `error: ${sessionError.name} - ${sessionError.message}`;
     else if (viewer) {
       document.title = `Yuiko at ${os.platform()}. Welcome, ${viewer.name}!`;
     }
-  }, [isLoadingSession, sessionStatus, sessionError, viewer]);
+  }, [isLoadingSession, sessionError, viewer, isLoggedIn]);
 
   const login = () => {
     let win = new remote.BrowserWindow({ autoHideMenuBar: true, width: 400, height: 550 });
     win.loadURL('https://anilist.co/api/v2/oauth/authorize?client_id=2775&response_type=token');
     win.on('page-title-updated', () => {
       if (win.webContents.getURL().includes('#')) {
-        storage.set('token', {
-          token: url
+        store.set(
+          'token',
+          url
             .parse(win.webContents.getURL())
             .hash.split('&')[0]
             .substring(14),
-        });
-        client.resetStore();
+        );
+        setLoggedIn(true);
         win.close();
       }
     });
@@ -91,7 +95,12 @@ export default function Yuiko() {
     });
   };
 
-  const logout = () => {};
+  const logout = () => {
+    store.delete('token');
+    setLoggedIn(false);
+    setLists({});
+    client.resetStore();
+  };
 
   const handleSetup = () => {
     if (!viewer) login();

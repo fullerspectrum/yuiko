@@ -3,23 +3,15 @@ import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import './index.css';
-import storage from 'electron-json-storage';
+import Store from 'electron-store';
 import Yuiko from './Yuiko';
 import * as serviceWorker from './serviceWorker';
 
-function storageGetPromise(key) {
-  return new Promise((resolve, reject) => {
-    storage.get(key, (error, data) => {
-      if (error) return reject(error);
-      return resolve(data);
-    });
-  });
-}
-
 const client = new ApolloClient({
   uri: 'https://graphql.anilist.co',
-  request: async (operation) => {
-    const { token } = await storageGetPromise('token');
+  request: (operation) => {
+    const store = new Store();
+    const token = store.get('token', '');
     operation.setContext({
       headers: {
         authorization: `Bearer ${token}`,
