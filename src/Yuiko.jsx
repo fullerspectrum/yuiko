@@ -5,6 +5,7 @@ import { gql } from 'apollo-boost';
 import os from 'os';
 import url from 'url';
 import Store from 'electron-store';
+import queryString from 'query-string';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
 import { getViewer, getAnimeList, getMangaList } from './lib/anilist';
@@ -27,6 +28,7 @@ export default function Yuiko() {
     notifyOnNetworkStatusChange: true,
     skip: !isLoggedIn,
   });
+
   const skip = viewer === undefined;
 
   const {
@@ -64,32 +66,37 @@ export default function Yuiko() {
   });
 
   useEffect(() => {
-    if (isLoadingSession || !isLoggedIn) document.title = `Yuiko - not online`;
-    if (sessionError) document.title = `error: ${sessionError.name} - ${sessionError.message}`;
-    else if (viewer) {
+    if (!isLoggedIn) document.title = 'Yuiko - not logged in';
+    else if (isLoadingSession) document.title = 'Yuiko - loading';
+    else if (isLoggedIn && viewer)
       document.title = `Yuiko at ${os.platform()}. Welcome, ${viewer.name}!`;
-    }
+
+    if (sessionError) document.title = `error: ${sessionError.name} - ${sessionError.message}`;
   }, [isLoadingSession, sessionError, viewer, isLoggedIn]);
 
   const login = () => {
     let win = new remote.BrowserWindow({ autoHideMenuBar: true, width: 400, height: 550 });
     win.loadURL('https://anilist.co/api/v2/oauth/authorize?client_id=2775&response_type=token');
+
     win.on('page-title-updated', () => {
-      if (win.webContents.getURL().includes('#')) {
-        store.set(
-          'token',
-          url
-            .parse(win.webContents.getURL())
-            .hash.split('&')[0]
-            .substring(14),
-        );
+      const winURL = win.webContents.getURL();
+
+      if (winURL.includes('#')) {
+        const parsedURL = url.parse(winURL);
+        const urlParams = queryString.parse(parsedURL.hash);
+        const token = urlParams.access_token;
+
+        store.set('token', token);
         setLoggedIn(true);
+
         win.close();
       }
     });
+
     win.on('closed', () => {
       const ses = remote.session.defaultSession;
       ses.clearStorageData({ origin: 'https://anilist.co', storages: ['cookies'] });
+
       win = null;
     });
   };
@@ -98,12 +105,13 @@ export default function Yuiko() {
     store.delete('token');
     setLoggedIn(false);
     setLists({});
+
     client.resetStore();
   };
 
   const handleSetup = () => {
-    if (!viewer) login();
-    else logout();
+    if (isLoggedIn) logout();
+    else login();
   };
 
   return (
@@ -137,7 +145,7 @@ export default function Yuiko() {
               </li>
               <li>
                 <button type="button" onClick={() => handleSetup()}>
-                  {!viewer ? 'Login' : 'Logout'}
+                  {isLoggedIn ? 'Logout' : 'Login'}
                 </button>
               </li>
               <li>
