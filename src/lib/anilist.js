@@ -5,8 +5,7 @@ module.exports = {
       name
       updatedAt
     }
-  }
-  `,
+  }`,
   MediaListCollection: `query($id: Int) {
     animelist: MediaListCollection(userId: $id, type: ANIME) {
       lists {
@@ -28,25 +27,25 @@ module.exports = {
       }
       hasNextChunk
     }
-  mangalist: MediaListCollection(userId: $id, type: MANGA) {
-    lists {
-      entries {
-        media {
-          title {
-            romaji
+    mangalist: MediaListCollection(userId: $id, type: MANGA) {
+      lists {
+        entries {
+          media {
+            title {
+              romaji
+            }
+            format
+            episodes
           }
-          format
-          episodes
+          progress
+          score
         }
-        progress
-        score
+        name
+        isCustomList
+        isSplitCompletedList
+        status
       }
-      name
-      isCustomList
-      isSplitCompletedList
-      status
+      hasNextChunk
     }
-    hasNextChunk
-  }
-}`,
+  }`,
 };
