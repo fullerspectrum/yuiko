@@ -8,7 +8,7 @@ import Store from 'electron-store';
 import queryString from 'query-string';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
-import { getViewer, getAnimeList, getMangaList } from './lib/anilist';
+import { Viewer, MediaListCollection } from './lib/anilist';
 import './Yuiko.css';
 import List from './screens/List';
 import NowPlaying from './screens/NowPlaying';
@@ -24,7 +24,7 @@ export default function Yuiko() {
     loading: isLoadingSession,
     error: sessionError,
     data: { Viewer: viewer } = {},
-  } = useQuery(gql(getViewer), {
+  } = useQuery(gql(Viewer), {
     notifyOnNetworkStatusChange: true,
     skip: !isLoggedIn,
   });
@@ -32,36 +32,20 @@ export default function Yuiko() {
   const skip = viewer === undefined;
 
   const {
-    loading: isLoadingAL,
-    data: { MediaListCollection: { lists: [...animelists] = [] } = {} } = {},
-    refetch: ALRefetch,
-  } = useQuery(gql(getAnimeList), {
+    loading: isLoadingLists,
+    data: {
+      animelist: { lists: [...animelists] = [] } = {},
+      mangalist: { lists: [...mangalists] = [] } = {},
+    } = {},
+    refetch: listsRefetch,
+  } = useQuery(gql(MediaListCollection), {
     notifyOnNetworkStatusChange: true,
     variables: {
       id: skip || viewer.id,
     },
     skip,
     onCompleted: () => {
-      setLists((state) => {
-        return { ...state, animelist: animelists };
-      });
-    },
-  });
-
-  const {
-    loading: isLoadingML,
-    data: { MediaListCollection: { lists: [...mangalists] = [] } = {} } = {},
-    refetch: MLRefetch,
-  } = useQuery(gql(getMangaList), {
-    notifyOnNetworkStatusChange: true,
-    variables: {
-      id: skip || viewer.id,
-    },
-    skip,
-    onCompleted: () => {
-      setLists((state) => {
-        return { ...state, mangalist: mangalists };
-      });
+      setLists({ animelist: animelists, mangalist: mangalists });
     },
   });
 
@@ -152,8 +136,7 @@ export default function Yuiko() {
                 <button
                   type="button"
                   onClick={() => {
-                    ALRefetch();
-                    MLRefetch();
+                    listsRefetch();
                   }}
                 >
                   Sync
@@ -174,9 +157,7 @@ export default function Yuiko() {
             />
           </Switch>
         </div>
-        <div className="Yuiko-footer">
-          {(isLoadingAL || isLoadingML) && <p>Sync in progress</p>}
-        </div>
+        <div className="Yuiko-footer">{isLoadingLists && <p>Sync in progress</p>}</div>
       </div>
     </HashRouter>
   );
