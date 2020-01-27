@@ -6,6 +6,7 @@ module.exports = {
       updatedAt
     }
   }`,
+
   MediaListCollection: `query($id: Int) {
     animelist: MediaListCollection(userId: $id, type: ANIME) {
       lists {
