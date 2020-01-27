@@ -1,5 +1,5 @@
 module.exports = {
-  getViewer: `query {
+  Viewer: `query {
     Viewer {
       id
       name
@@ -7,8 +7,8 @@ module.exports = {
     }
   }
   `,
-  getAnimeList: `query($id: Int) {
-    MediaListCollection(userId: $id, type: ANIME) {
+  MediaListCollection: `query($id: Int) {
+    animelist: MediaListCollection(userId: $id, type: ANIME) {
       lists {
         entries {
           media {
@@ -28,27 +28,25 @@ module.exports = {
       }
       hasNextChunk
     }
-  }`,
-  getMangaList: `query($id: Int) {
-    MediaListCollection(userId: $id, type: MANGA) {
-      lists {
-        entries {
-          media {
-            title {
-              romaji
-            }
-            format
-            episodes
+  mangalist: MediaListCollection(userId: $id, type: MANGA) {
+    lists {
+      entries {
+        media {
+          title {
+            romaji
           }
-          progress
-          score
+          format
+          episodes
         }
-        name
-        isCustomList
-        isSplitCompletedList
-        status
+        progress
+        score
       }
-      hasNextChunk
+      name
+      isCustomList
+      isSplitCompletedList
+      status
     }
-  }`,
+    hasNextChunk
+  }
+}`,
 };
