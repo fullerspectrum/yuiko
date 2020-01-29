@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { HashRouter, Route, Switch, Link } from 'react-router-dom';
 import { useQuery } from 'react-apollo';
 import { gql } from 'apollo-boost';
@@ -13,9 +14,7 @@ import './Yuiko.css';
 import List from './screens/List';
 import NowPlaying from './screens/NowPlaying';
 
-const store = new Store();
-
-export default function Yuiko() {
+export default function yuiko({ store }) {
   const [lists, setLists] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(!!store.get('token'));
 
@@ -128,17 +127,12 @@ export default function Yuiko() {
                 <Link to="/settings">Settings</Link>
               </li>
               <li>
-                <button type="button" onClick={() => handleSetup()}>
+                <button type="button" onClick={handleSetup}>
                   {isLoggedIn ? 'Logout' : 'Login'}
                 </button>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
-                    listsRefetch();
-                  }}
-                >
+                <button type="button" onClick={() => listsRefetch()}>
                   Sync
                 </button>
               </li>
@@ -149,6 +143,7 @@ export default function Yuiko() {
         <div className="Yuiko-rendered_content">
           <Switch>
             <Route path="/" exact component={NowPlaying} />
+            <Route path="/settings" component={List} />
             <Route
               path="/:listType/:listName"
               render={({ match }) => (
@@ -162,3 +157,11 @@ export default function Yuiko() {
     </HashRouter>
   );
 }
+
+yuiko.propTypes = {
+  store: PropTypes.instanceOf(Store),
+};
+
+yuiko.defaultProps = {
+  store: new Store(),
+};
