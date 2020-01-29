@@ -14,7 +14,7 @@ import './Yuiko.css';
 import List from './screens/List';
 import NowPlaying from './screens/NowPlaying';
 
-export default function yuiko({ store }) {
+export default function Yuiko({ store }) {
   const [lists, setLists] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(!!store.get('token'));
 
@@ -158,10 +158,10 @@ export default function yuiko({ store }) {
   );
 }
 
-yuiko.propTypes = {
+Yuiko.propTypes = {
   store: PropTypes.instanceOf(Store),
 };
 
-yuiko.defaultProps = {
+Yuiko.defaultProps = {
   store: new Store(),
 };
