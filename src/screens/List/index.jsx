@@ -15,7 +15,7 @@ export default function list({ lists, params }) {
           <nav>
             {lists.map((item) => (
               <Link
-                className={params.listName === item.name && 'active'}
+                className={params.listName === item.name ? 'active' : null}
                 id={item.name}
                 key={item.name}
                 to={() => `/${params.listType}/${item.name}`}

@@ -105,7 +105,11 @@ export default function Yuiko({ store }) {
           <div>
             <ul>
               <li>
-                <Link onClick={() => setSelected(0)} className={selected === 0 && 'active'} to="/">
+                <Link
+                  onClick={() => setSelected(0)}
+                  className={selected === 0 ? 'active' : null}
+                  to="/"
+                >
                   Now Playing
                 </Link>
               </li>
@@ -113,7 +117,7 @@ export default function Yuiko({ store }) {
               <li>
                 <Link
                   onClick={() => setSelected(1)}
-                  className={selected === 1 && 'active'}
+                  className={selected === 1 ? 'active' : null}
                   to="/animelist/Watching"
                 >
                   Anime List
@@ -122,7 +126,7 @@ export default function Yuiko({ store }) {
               <li>
                 <Link
                   onClick={() => setSelected(2)}
-                  className={selected === 2 && 'active'}
+                  className={selected === 2 ? 'active' : null}
                   to="/mangalist/Reading"
                 >
                   Manga List
@@ -131,7 +135,7 @@ export default function Yuiko({ store }) {
               <li>
                 <Link
                   onClick={() => setSelected(3)}
-                  className={selected === 3 && 'active'}
+                  className={selected === 3 ? 'active' : null}
                   to="/browse"
                 >
                   Browse
@@ -140,7 +144,7 @@ export default function Yuiko({ store }) {
               <li>
                 <Link
                   onClick={() => setSelected(4)}
-                  className={selected === 4 && 'active'}
+                  className={selected === 4 ? 'active' : null}
                   to="/rss"
                 >
                   RSS Feeds
