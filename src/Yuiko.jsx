@@ -17,6 +17,7 @@ import NowPlaying from './screens/NowPlaying';
 export default function Yuiko({ store }) {
   const [lists, setLists] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(!!store.get('token'));
+  const [selected, setSelected] = useState(0);
 
   const {
     client,
@@ -104,20 +105,46 @@ export default function Yuiko({ store }) {
           <div>
             <ul>
               <li>
-                <Link to="/">Now Playing</Link>
+                <Link onClick={() => setSelected(0)} className={selected === 0 && 'active'} to="/">
+                  Now Playing
+                </Link>
               </li>
               {/* reminder to put a default list in a settings file later. */}
               <li>
-                <Link to="/animelist/Watching">Anime List</Link>
+                <Link
+                  onClick={() => setSelected(1)}
+                  className={selected === 1 && 'active'}
+                  to="/animelist/Watching"
+                >
+                  Anime List
+                </Link>
               </li>
               <li>
-                <Link to="/mangalist/Reading">Manga List</Link>
+                <Link
+                  onClick={() => setSelected(2)}
+                  className={selected === 2 && 'active'}
+                  to="/mangalist/Reading"
+                >
+                  Manga List
+                </Link>
               </li>
               <li>
-                <Link to="/browse">Browse</Link>
+                <Link
+                  onClick={() => setSelected(3)}
+                  className={selected === 3 && 'active'}
+                  to="/browse"
+                >
+                  Browse
+                </Link>
               </li>
               <li>
-                <Link to="/rss">RSS Feeds</Link>
+                <Link
+                  onClick={() => setSelected(4)}
+                  className={selected === 4 && 'active'}
+                  to="/rss"
+                >
+                  RSS Feeds
+                </Link>
               </li>
             </ul>
           </div>

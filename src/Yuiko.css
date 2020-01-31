@@ -53,6 +53,10 @@
   color: var(--primary-light);
 }
 
+.Yuiko-sidemenu .active {
+  color: var(--primary-light);
+}
+
 .Yuiko-settings button {
   background: none;
   border: none;
