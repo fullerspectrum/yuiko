@@ -14,7 +14,12 @@ export default function list({ lists, params }) {
         <div className="List-navbar">
           <nav>
             {lists.map((item) => (
-              <Link id={item.name} key={item.name} to={() => `/${params.listType}/${item.name}`}>
+              <Link
+                className={params.listName === item.name && 'active'}
+                id={item.name}
+                key={item.name}
+                to={() => `/${params.listType}/${item.name}`}
+              >
                 {item.name}
               </Link>
             ))}
