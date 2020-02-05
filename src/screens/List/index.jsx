@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './styles.css';
+import './style.css';
 import ListContainer from '../../components/ListContainer';
 import ListEntry from '../../components/ListEntry';
 

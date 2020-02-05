@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './style.css';
 
 export default function ListContainer({ children }) {
   return (
