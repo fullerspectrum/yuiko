@@ -11,7 +11,9 @@ module.exports = {
     animelist: MediaListCollection(userId: $id, type: ANIME) {
       lists {
         entries {
+          id
           media {
+            id
             title {
               romaji
             }
@@ -31,7 +33,9 @@ module.exports = {
     mangalist: MediaListCollection(userId: $id, type: MANGA) {
       lists {
         entries {
+          id
           media {
+            id
             title {
               romaji
             }
