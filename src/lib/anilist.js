@@ -53,4 +53,11 @@ module.exports = {
       hasNextChunk
     }
   }`,
+
+  updateEntryProgress: `mutation($id: Int, $progress: Int) {
+    SaveMediaListEntry(id: $id, progress: $progress) {
+      progress
+      status
+    }
+  }`,
 };
