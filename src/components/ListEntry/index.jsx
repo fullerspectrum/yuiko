@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Progress from '../Progress';
 
 export default function listEntry({ data }) {
   return (
     <tr>
       <td id={`title-${data.id}`}>{data.title}</td>
-      <td id={`progress-${data.id}`}>{`${data.progress}/${data.episodes}`}</td>
+      <Progress id={data.id} progress={data.progress} episodes={data.episodes} />
       <td id={`score-${data.id}`}>{data.score === 0 ? '-' : data.score}</td>
       <td id={`type-${data.id}`}>{data.type}</td>
     </tr>
