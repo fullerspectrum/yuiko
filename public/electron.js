@@ -28,7 +28,7 @@ function createWindow() {
     if (os.platform() === 'linux') {
       const devToolsFolderPath = path.join(
         os.homedir(),
-        `/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/`,
+        `/.config/google-chrome-unstable/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/`,
       );
       const devToolsFolderContent = fs.readdirSync(devToolsFolderPath);
 
