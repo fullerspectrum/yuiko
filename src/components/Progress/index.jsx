@@ -7,7 +7,11 @@ const Progress = ({ id, progress, episodes }) => {
   const [updateProgress, { data }] = useMutation(gql(updateEntryProgress));
 
   const addProgress = (increment) => {
-    updateProgress({ variables: { id, progress: progress + increment } });
+    updateProgress({
+      variables: { id, progress: progress + increment },
+      refetchQueries: ['MediaListCollection'],
+      awaitRefetchQueries: true,
+    });
   };
 
   return (
