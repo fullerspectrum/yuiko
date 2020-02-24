@@ -7,7 +7,7 @@ module.exports = {
     }
   }`,
 
-  MediaListCollection: `query($id: Int) {
+  MediaListCollection: `query MediaListCollection($id: Int) {
     animelist: MediaListCollection(userId: $id, type: ANIME) {
       lists {
         entries {
