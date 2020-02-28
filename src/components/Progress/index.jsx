@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useMutation } from 'react-apollo';
 import { updateEntryProgress } from '../../lib/anilist';
 
 const Progress = ({ id, progress, episodes }) => {
-  const [updateProgress, { data }] = useMutation(gql(updateEntryProgress));
+  const [updateProgress] = useMutation(gql(updateEntryProgress));
 
   const addProgress = (increment) => {
     updateProgress({
@@ -25,6 +26,18 @@ const Progress = ({ id, progress, episodes }) => {
       </button>
     </td>
   );
+};
+
+Progress.propTypes = {
+  id: PropTypes.number,
+  progress: PropTypes.number,
+  episodes: PropTypes.number,
+};
+
+Progress.defaultProps = {
+  id: undefined,
+  progress: undefined,
+  episodes: undefined,
 };
 
 export default Progress;
