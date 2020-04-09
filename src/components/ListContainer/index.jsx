@@ -22,5 +22,5 @@ ListContainer.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 ListContainer.defaultProps = {
-  children: undefined,
+  children: null,
 };
