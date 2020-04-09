@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 const ModalDialog = ({ show, toggleShow, children }) => {
-  let modal;
+  let modal = null;
 
   if (show) {
     modal = (
