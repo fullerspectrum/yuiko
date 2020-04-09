@@ -57,7 +57,7 @@
   color: var(--primary-light);
 }
 
-.Yuiko-settings button {
+button {
   background: none;
   border: none;
   color: inherit;
