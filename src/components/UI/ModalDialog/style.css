@@ -1,0 +1,28 @@
+.modal {
+  width: 50%;
+  height: 50%;
+  left: 25%;
+  bottom: 25%;
+  display: inline-block;
+  position: fixed;
+  overflow: scroll;
+  z-index: 20;
+
+  opacity: 100%;
+  background-color: white;
+}
+
+/* Below are both techniques I tried to break lines
+reference for the first one: https://css-tricks.com/injecting-line-break/
+reference for the second one: https://stackoverflow.com/questions/12691387/line-break-in-a-span-with-defined-width
+*/
+/* .modal::before {
+  content: '\A';
+} */
+
+/* .modal span {
+  display: block;
+  word-wrap: break-word;
+  color: blue;
+  font-size: 100px;
+} */
