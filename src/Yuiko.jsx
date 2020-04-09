@@ -13,11 +13,18 @@ import { Viewer, MediaListCollection } from './lib/anilist';
 import './Yuiko.css';
 import List from './screens/List';
 import NowPlaying from './screens/NowPlaying';
+import Backdrop from './components/UI/Backdrop';
 
-export default function Yuiko({ store }) {
+const Yuiko = ({ store }) => {
   const [lists, setLists] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(!!store.get('token'));
   const [selected, setSelected] = useState(0);
+  const [showModal, setModal] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+
+  const toggleModal = () => {
+    setModal(!showModal);
+  };
 
   const {
     client,
@@ -101,6 +108,10 @@ export default function Yuiko({ store }) {
   return (
     <HashRouter>
       <div className="Yuiko">
+        <Backdrop show={showModal} toggleShow={toggleModal}>
+          {modalContent}
+        </Backdrop>
+
         <div className="Yuiko-sidemenu">
           <div>
             <ul>
@@ -178,7 +189,12 @@ export default function Yuiko({ store }) {
             <Route
               path="/:listType/:listName"
               render={({ match }) => (
-                <List params={match.params} lists={lists[match.params.listType]} />
+                <List
+                  toggleEditor={toggleModal}
+                  setEditorContent={setModalContent}
+                  params={match.params}
+                  lists={lists[match.params.listType]}
+                />
               )}
             />
           </Switch>
@@ -187,7 +203,7 @@ export default function Yuiko({ store }) {
       </div>
     </HashRouter>
   );
-}
+};
 
 Yuiko.propTypes = {
   store: PropTypes.instanceOf(Store),
@@ -196,3 +212,5 @@ Yuiko.propTypes = {
 Yuiko.defaultProps = {
   store: new Store(),
 };
+
+export default Yuiko;
