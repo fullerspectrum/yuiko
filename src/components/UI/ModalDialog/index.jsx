@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
 const ModalDialog = ({ show, toggleShow, children }) => {
+  const childrenRef = useRef(null);
   let modal = null;
+
+  useEffect(() => {
+    childrenRef.current.focus();
+  }, []);
 
   if (show) {
     modal = (
-      <div className="modal" onKeyUp={toggleShow} role="textbox" tabIndex={0}>
+      <div className="modal" onKeyUp={toggleShow} role="textbox" tabIndex={0} ref={childrenRef}>
         {children}
       </div>
     );
