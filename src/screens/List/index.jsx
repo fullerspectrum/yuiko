@@ -5,11 +5,11 @@ import './style.css';
 import ListContainer from '../../components/ListContainer';
 import ListEntry from '../../components/ListEntry';
 
-export default function List({ lists, params }) {
+const List = ({ lists, params, toggleEditor, setEditorContent }) => {
   const [currentList] = lists.filter((item) => item.name === params.listName);
 
-  let listEntries;
-  let navbarLinks;
+  let listEntries = null;
+  let navbarLinks = null;
 
   if (lists) {
     navbarLinks = lists.map((item) => (
@@ -27,6 +27,8 @@ export default function List({ lists, params }) {
   if (currentList) {
     listEntries = currentList.entries.map((value) => (
       <ListEntry
+        setEditorContent={setEditorContent}
+        toggleEditor={toggleEditor}
         key={`list-entry-${value.id}`}
         data={{
           title: value.media.title.romaji,
@@ -51,13 +53,17 @@ export default function List({ lists, params }) {
       </div>
     </div>
   );
-}
+};
 
 List.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object),
   params: PropTypes.shape({ listType: PropTypes.string, listName: PropTypes.string }),
+  toggleEditor: PropTypes.func.isRequired,
+  setEditorContent: PropTypes.func.isRequired,
 };
 List.defaultProps = {
   lists: [],
   params: {},
 };
+
+export default List;
