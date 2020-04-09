@@ -10,9 +10,13 @@ const ModalDialog = ({ show, toggleShow, children }) => {
     childrenRef.current.focus();
   }, []);
 
+  const handleKeyUp = (e) => {
+    if (e.key === 'Escape') toggleShow();
+  };
+
   if (show) {
     modal = (
-      <div className="modal" onKeyUp={toggleShow} role="textbox" tabIndex={0} ref={childrenRef}>
+      <div className="modal" onKeyUp={handleKeyUp} role="textbox" tabIndex={0} ref={childrenRef}>
         {children}
       </div>
     );
