@@ -20,7 +20,7 @@ const Progress = ({ id, progress, episodes }) => {
       <button type="button" onClick={() => addProgress(-1)}>
         -
       </button>
-      {`${progress}/${episodes}`}
+      {`${progress}/${episodes} `}
       <button type="button" onClick={() => addProgress(1)}>
         +
       </button>
