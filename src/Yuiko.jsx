@@ -13,7 +13,6 @@ import { Viewer, MediaListCollection } from './lib/anilist';
 import './Yuiko.css';
 import List from './screens/List';
 import NowPlaying from './screens/NowPlaying';
-import Browse from './screens/Browse';
 import Backdrop from './components/UI/Backdrop';
 
 const Yuiko = ({ store }) => {
@@ -186,7 +185,6 @@ const Yuiko = ({ store }) => {
         <div className="Yuiko-rendered_content">
           <Switch>
             <Route path="/" exact component={NowPlaying} />
-            <Route path="/browse" component={Browse} />
             <Route path="/settings" component={List} />
             <Route
               path="/:listType/:listName"

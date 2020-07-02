@@ -38,6 +38,7 @@ const List = ({ lists, params, toggleEditor, setEditorContent }) => {
           chapters: value.media.chapters,
           score: value.score,
           type: value.media.format,
+          status: value.media.status,
         }}
       />
     ));

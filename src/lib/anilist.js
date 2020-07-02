@@ -20,6 +20,7 @@ module.exports = {
             }
             format
             episodes
+            status
           }
           progress
           score
@@ -43,6 +44,7 @@ module.exports = {
             }
             format
             chapters
+            status
           }
           progress
           score
