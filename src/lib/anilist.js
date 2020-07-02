@@ -16,6 +16,7 @@ module.exports = {
             id
             title {
               romaji
+              userPreferred
             }
             format
             episodes
@@ -38,6 +39,7 @@ module.exports = {
             id
             title {
               romaji
+              userPreferred
             }
             format
             episodes
@@ -60,4 +62,21 @@ module.exports = {
       status
     }
   }`,
+  search: `query($sort:[MediaSort]) {
+    Page{
+      media (sort:$sort){
+        id
+        title {
+          romaji
+          english
+          native
+          userPreferred
+        }
+        averageScore
+        meanScore
+        format
+        episodes
+      }
+    }
+  }`
 };
