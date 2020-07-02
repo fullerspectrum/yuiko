@@ -4,17 +4,15 @@ import Progress from '../Progress';
 
 const ListEntry = ({ data, toggleEditor, setEditorContent }) => {
   const handleRightClick = () => {
-    if(toggleEditor)
-      toggleEditor();
-    if(setEditorContent)
-      setEditorContent(
-        <div>
-          {'You tried to edit '}
-          {data.title}
-          {', now I will type until it reaches the other end of the box'}
-          {', I need to test the overflow'}
-        </div>,
-      );
+    toggleEditor();
+    setEditorContent(
+      <div>
+        {'You tried to edit '}
+        {data.title}
+        {', now I will type until it reaches the other end of the box'}
+        {', I need to test the overflow'}
+      </div>,
+    );
   };
   return (
     <tr onContextMenu={handleRightClick}>

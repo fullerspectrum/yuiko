@@ -186,8 +186,7 @@ const Yuiko = ({ store }) => {
         <div className="Yuiko-rendered_content">
           <Switch>
             <Route path="/" exact component={NowPlaying} />
-            <Route path="/browse" component={Browse} toggleEditor={toggleModal}
-              setEditorContent={setModalContent}/>
+            <Route path="/browse" component={Browse} />
             <Route path="/settings" component={List} />
             <Route
               path="/:listType/:listName"

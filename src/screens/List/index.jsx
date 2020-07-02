@@ -25,7 +25,6 @@ const List = ({ lists, params, toggleEditor, setEditorContent }) => {
   }
 
   if (currentList) {
-    console.log(currentList.entries)
     listEntries = currentList.entries.map((value) => (
       <ListEntry
         setEditorContent={setEditorContent}
