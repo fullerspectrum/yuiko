@@ -42,7 +42,7 @@ module.exports = {
               userPreferred
             }
             format
-            episodes
+            chapters
           }
           progress
           score

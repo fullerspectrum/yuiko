@@ -25,6 +25,7 @@ const List = ({ lists, params, toggleEditor, setEditorContent }) => {
   }
 
   if (currentList) {
+    console.log(currentList.entries)
     listEntries = currentList.entries.map((value) => (
       <ListEntry
         setEditorContent={setEditorContent}
@@ -35,6 +36,7 @@ const List = ({ lists, params, toggleEditor, setEditorContent }) => {
           id: value.id,
           progress: value.progress,
           episodes: value.media.episodes,
+          chapters: value.media.chapters,
           score: value.score,
           type: value.media.format,
         }}

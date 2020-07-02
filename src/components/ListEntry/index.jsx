@@ -19,7 +19,11 @@ const ListEntry = ({ data, toggleEditor, setEditorContent }) => {
   return (
     <tr onContextMenu={handleRightClick}>
       <td id={`title-${data.id}`}>{data.title}</td>
-      <Progress id={data.id} progress={data.progress} episodes={data.episodes} />
+      {data.chapters
+        ? <Progress id={data.id} progress={data.progress} episodes={data.chapters} />
+        : <Progress id={data.id} progress={data.progress} episodes={data.episodes} />
+      }
+      
       <td id={`score-${data.id}`}>{data.score === 0 ? '-' : data.score}</td>
       <td id={`type-${data.id}`}>{data.type}</td>
     </tr>
@@ -32,6 +36,7 @@ ListEntry.propTypes = {
     id: PropTypes.number,
     progress: PropTypes.number,
     episodes: PropTypes.number,
+    chapters: PropTypes.number,
     score: PropTypes.number,
     type: PropTypes.string,
   }),
