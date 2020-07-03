@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import Progress from '../Progress';
+import React from 'react';
 import { typeFormat } from '../../lib/textFormatting';
+import Progress from '../Progress';
 
 const ListEntry = ({ data, toggleEditor, setEditorContent }) => {
   const handleRightClick = () => {
@@ -15,14 +15,16 @@ const ListEntry = ({ data, toggleEditor, setEditorContent }) => {
       </div>,
     );
   };
+
   return (
     <tr onContextMenu={handleRightClick}>
       <td id={`title-${data.id}`}>{data.title}</td>
-      {data.chapters
-        ? <Progress id={data.id} progress={data.progress} episodes={data.chapters} status={data.status} />
-        : <Progress id={data.id} progress={data.progress} episodes={data.episodes} status={data.status} />
-      }
-      
+      <Progress
+        id={data.id}
+        progress={data.progress}
+        total={data.chapters ? data.chapters : data.episodes}
+        status={data.status}
+      />
       <td id={`score-${data.id}`}>{data.score === 0 ? '-' : data.score}</td>
       <td id={`type-${data.id}`}>{typeFormat(data.type)}</td>
     </tr>
@@ -44,7 +46,7 @@ ListEntry.propTypes = {
   setEditorContent: PropTypes.func.isRequired,
 };
 ListEntry.defaultProps = {
-  data: { title: '', id: -1, score: 0, type: '' },
+  data: { title: '', id: -1, score: 0, type: '', episodes: 0, chapters: 0 },
 };
 
 export default ListEntry;
