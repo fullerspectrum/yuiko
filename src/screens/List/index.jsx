@@ -31,12 +31,14 @@ const List = ({ lists, params, toggleEditor, setEditorContent }) => {
         toggleEditor={toggleEditor}
         key={`list-entry-${value.id}`}
         data={{
-          title: value.media.title.romaji,
+          title: value.media.title.userPreferred,
           id: value.id,
           progress: value.progress,
           episodes: value.media.episodes,
+          chapters: value.media.chapters,
           score: value.score,
           type: value.media.format,
+          status: value.media.status,
         }}
       />
     ));

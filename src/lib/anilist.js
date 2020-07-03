@@ -16,9 +16,11 @@ module.exports = {
             id
             title {
               romaji
+              userPreferred
             }
             format
             episodes
+            status
           }
           progress
           score
@@ -38,9 +40,11 @@ module.exports = {
             id
             title {
               romaji
+              userPreferred
             }
             format
-            episodes
+            chapters
+            status
           }
           progress
           score
@@ -60,4 +64,21 @@ module.exports = {
       status
     }
   }`,
+  search: `query($sort:[MediaSort]) {
+    Page{
+      media (sort:$sort){
+        id
+        title {
+          romaji
+          english
+          native
+          userPreferred
+        }
+        averageScore
+        meanScore
+        format
+        episodes
+      }
+    }
+  }`
 };

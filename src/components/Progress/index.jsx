@@ -4,7 +4,7 @@ import { gql } from 'apollo-boost';
 import { useMutation } from 'react-apollo';
 import { updateEntryProgress } from '../../lib/anilist';
 
-const Progress = ({ id, progress, episodes }) => {
+const Progress = ({ id, progress, episodes, status }) => {
   const [updateProgress] = useMutation(gql(updateEntryProgress));
 
   const addProgress = (increment) => {
@@ -20,7 +20,9 @@ const Progress = ({ id, progress, episodes }) => {
       <button type="button" onClick={() => addProgress(-1)}>
         -
       </button>
-      {`${progress}/${episodes} `}
+      {(status == "FINISHED" || status == "CANCELLED") && (episodes)
+        ? `${progress}/${episodes} `
+        : `${progress}/NA `}
       <button type="button" onClick={() => addProgress(1)}>
         +
       </button>
