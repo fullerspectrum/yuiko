@@ -1,4 +1,4 @@
-hey! thanks for coming to my yuiko repository. this project is not getting done anytime soon this year, as I have many other things that I want to pay more attention to! but thanks for stopping by, and feel free to fork it :) it's licensed under MIT so I'm looking forward to seeing nice forks or final projects, proprietary stuff if you want too <3 
+hey! thanks for coming to my yuiko repository. this project is not getting done anytime soon this year as I have many other things that I want to pay more attention to! but thanks for stopping by, and feel free to fork it :) it's licensed under MIT so I'm looking forward to seeing nice forks or final projects, proprietary stuff if you want too <3 
 
 # Features until v1.0
 
