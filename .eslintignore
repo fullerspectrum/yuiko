@@ -1,0 +1,3 @@
+# ignore default boilerplate files
+electron.js
+serviceWorker.js

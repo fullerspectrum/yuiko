@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { gql } from 'apollo-boost';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { useMutation } from 'react-apollo';
 import { updateEntryProgress } from '../../lib/anilist';
 
-const Progress = ({ id, progress, episodes, status }) => {
+const Progress = ({ id, progress, total, status }) => {
   const [updateProgress] = useMutation(gql(updateEntryProgress));
 
   const addProgress = (increment) => {
@@ -15,14 +15,18 @@ const Progress = ({ id, progress, episodes, status }) => {
     });
   };
 
+  let progressMessage = `${progress}/`;
+
+  // reminder to check and test if a show is currently airing
+  if ((status === 'FINISHED' || status === 'CANCELLED') && total) progressMessage += `${total} `;
+  else progressMessage += '? ';
+
   return (
     <td id={`progress-${id}`}>
       <button type="button" onClick={() => addProgress(-1)}>
         -
       </button>
-      {(status == "FINISHED" || status == "CANCELLED") && (episodes)
-        ? `${progress}/${episodes} `
-        : `${progress}/NA `}
+      {progressMessage}
       <button type="button" onClick={() => addProgress(1)}>
         +
       </button>
@@ -33,13 +37,15 @@ const Progress = ({ id, progress, episodes, status }) => {
 Progress.propTypes = {
   id: PropTypes.number,
   progress: PropTypes.number,
-  episodes: PropTypes.number,
+  total: PropTypes.number,
+  status: PropTypes.string,
 };
 
 Progress.defaultProps = {
   id: undefined,
   progress: undefined,
-  episodes: undefined,
+  total: undefined,
+  status: undefined,
 };
 
 export default Progress;
