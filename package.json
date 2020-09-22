@@ -12,7 +12,7 @@
     "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
     "electron-store": "^5.1.0",
-    "graphql": "^14.5.8",
+    "graphql": "^14.7.0",
     "graphql.macro": "^1.4.2",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
