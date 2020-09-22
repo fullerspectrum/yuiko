@@ -9,7 +9,7 @@
   "dependencies": {
     "apollo-boost": "^0.4.4",
     "apollo-client": "^2.6.4",
-    "cross-env": "^6.0.3",
+    "cross-env": "^7.0.2",
     "electron-is-dev": "^1.1.0",
     "electron-store": "^5.1.0",
     "graphql": "^14.5.8",
