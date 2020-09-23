@@ -25,7 +25,9 @@ const List = ({ lists, params, toggleEditor, setEditorContent }) => {
   }
 
   if (currentList) {
-    listEntries = currentList.entries.map((value) => (
+    // Sort by Title (asc) for now. Setting later?
+    listEntries = currentList.entries.sort((a, b) => a.media.title.userPreferred > b.media.title.userPreferred ? 1 : -1);
+    listEntries = listEntries.map((value) => (
       <ListEntry
         setEditorContent={setEditorContent}
         toggleEditor={toggleEditor}
