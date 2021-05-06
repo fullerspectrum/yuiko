@@ -14,7 +14,7 @@
     "electron-store": "^5.1.0",
     "graphql": "^14.5.8",
     "graphql.macro": "^1.4.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.2",
     "react": "^16.11.0",
